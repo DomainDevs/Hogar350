@@ -1,0 +1,889 @@
+[
+  {
+    "id": 1,
+    "title": "Casa moderna, chapinero alto",
+    "image": "https://multimedia.metrocuadrado.com/MC5977507/MC5977507_1_p.jpg",
+    "price": 450000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "area": 120,
+    "parkingSpaces": 1,
+    "favorite": true
+  },
+  {
+    "id": 2,
+    "title": "Apartamento",
+    "image": "https://multimedia.metrocuadrado.com/MC5976368/MC5976368_1_p.jpg",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85,
+    "parkingSpaces": 1,
+    "favorite": false
+  },
+  {
+    "id": 3,
+    "title": "Apartamento con patio",
+    "image": "https://multimedia.metrocuadrado.com/19579-M5661655/19579-M5661655_161_p.jpg",
+    "price": 450000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85,
+    "parkingSpaces": 1,
+    "favorite": true
+  },
+  {
+    "id": 4,
+    "title": "Apartamento con patio",
+    "image": "https://multimedia.metrocuadrado.com/MC5975811/MC5975811_1_p.jpg",
+    "price": 600000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 5,
+    "title": "Apartamento con patio",
+    "image": "https://multimedia.metrocuadrado.com/MC5975811/MC5975811_1_p.jpg",
+    "price": 840000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85,
+	"favorite": true
+  },
+  {
+    "id": 6,
+    "title": "Apartamento con patio",
+    "image": "https://multimedia.metrocuadrado.com/MC5485221/MC5485221_6_p.jpg",
+    "price": 1670000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 7,
+    "title": "Apartamento con patio",
+    "image": "https://multimedia.metrocuadrado.com/MC4785382/MC4785382_2_p.jpg",
+    "price": 400000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 8,
+    "title": "Apartamento con patio",
+    "image": "https://multimedia.metrocuadrado.com/815-M5597847/815-M5597847_61_p.jpg",
+    "price": 580000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 9,
+    "title": "Apartamento con patio",
+    "image": "https://multimedia.metrocuadrado.com/13194-M5490538/13194-M5490538_3_p.jpg",
+    "price": 3800000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 10,
+    "title": "Apartamento con patio",
+    "image": "https://multimedia.metrocuadrado.com/3147-M5591753/3147-M5591753_8_p.jpg",
+    "price": 800000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 11,
+    "title": "Apartamento con patio",
+    "image": "https://multimedia.metrocuadrado.com/19579-M5661655/19579-M5661655_161_p.jpg",
+    "price": 420000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 12,
+    "title": "Apartamento con patio",
+    "image": "https://multimedia.metrocuadrado.com/20033-M5850203/20033-M5850203_21_p.jpg",
+    "price": 1300000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 13,
+    "title": "Apartamento con patio",
+    "image": "https://multimedia.metrocuadrado.com/815-M5654820/815-M5654820_21_p.jpg",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 14,
+    "title": "Apartamento con patio",
+    "image": "https://multimedia.metrocuadrado.com/836-M5103777/836-M5103777_25_p.jpg",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 15,
+    "title": "Apartamento con patio",
+    "image": "https://multimedia.metrocuadrado.com/14984-M5844327/14984-M5844327_26_p.jpg",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 16,
+    "title": "Apartamento con patio",
+    "image": "https://multimedia.metrocuadrado.com/847-M5687022/847-M5687022_41_p.jpg",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 17,
+    "title": "Apartamento con patio",
+    "image": "https://multimedia.metrocuadrado.com/15936-M5649645/15936-M5649645_16_p.jpg",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 18,
+    "title": "Apartamento con patio",
+    "image": "https://multimedia.metrocuadrado.com/10139-M5749419/10139-M5749419_21_p.jpg",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 19,
+    "title": "Apartamento con patio",
+    "image": "https://multimedia.metrocuadrado.com/18214-M5807185/18214-M5807185_81_p.jpg",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 20,
+    "title": "Apartamento con patio",
+    "image": "https://multimedia.metrocuadrado.com/11813-M5639732/11813-M5639732_101_p.jpg",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 21,
+    "title": "Apartamento con patio",
+    "image": "https://multimedia.metrocuadrado.com/MC5983569/MC5983569_1_p.jpg",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 22,
+    "title": "Apartamento con patio",
+    "image": "https://multimedia.metrocuadrado.com/MC5819633/MC5819633_9_p.jpg",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 23,
+    "title": "Apartamento con patio",
+    "image": "https://multimedia.metrocuadrado.com/MC5827954/MC5827954_2_p.jpg",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 24,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+24",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 25,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+25",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 26,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+26",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 27,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+27",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 28,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+28",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 29,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+29",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 30,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+30",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 31,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+31",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 32,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+32",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 33,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+33",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 34,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+34",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 35,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+35",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 36,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+36",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 37,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+37",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 38,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+38",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 39,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+39",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 40,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+40",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 41,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+41",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 42,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+42",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 43,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+43",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 44,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+44",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 45,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+45",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 46,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+46",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 47,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+47",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 48,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+48",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 49,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+49",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 50,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+50",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 51,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+51",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 52,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+52",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 53,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+53",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 54,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+54",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 55,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+55",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 56,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+56",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 57,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+57",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 58,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+58",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 59,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+59",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 60,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+60",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 61,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+61",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 62,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+62",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 63,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+63",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 64,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+64",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 65,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+65",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 66,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+66",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 67,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+67",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 68,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+68",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 69,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+69",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 70,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+70",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 71,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+71",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 72,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+72",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 73,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+73",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 74,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+74",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 75,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+75",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 76,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+76",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 77,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+77",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 78,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+78",
+    "price": 6800000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 79,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+79",
+    "price": 800000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 80,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+80",
+    "price": 450000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 81,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+81",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 82,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+82",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 83,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+83",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 84,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+84",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 85,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+85",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 86,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+86",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 87,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+87",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  },
+  {
+    "id": 88,
+    "title": "Apartamento con patio",
+    "image": "https://placehold.co/640x480?text=Casa+88",
+    "price": 380000000,
+    "location": "Engativá, Bogotá",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "area": 85
+  }
+]

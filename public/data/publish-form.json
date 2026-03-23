@@ -1,0 +1,166 @@
+{
+  "secciones": [
+    {
+      "titulo": "Información General",
+      "descripcion": "Datos básicos de la propiedad para la publicación.",
+      "columnas": 2,
+      "campos": [
+        {
+          "nombre": "titulo",
+          "etiqueta": "Título de la publicación",
+          "tipo": "text",
+          "requerido": true,
+          "placeholder": "Ej: Lindo apartamento con vista al parque"
+        },
+        {
+          "nombre": "precio",
+          "etiqueta": "Precio (COP)",
+          "tipo": "number",
+          "requerido": true,
+          "placeholder": "1500000"
+        },
+        {
+          "nombre": "tipoInmueble",
+          "etiqueta": "Tipo de Inmueble",
+          "tipo": "select",
+          "requerido": true,
+          "opciones": [
+            { "valor": "apartamento", "texto": "Apartamento" },
+            { "valor": "casa", "texto": "Casa" },
+            { "valor": "lote", "texto": "Lote" },
+            { "valor": "oficina", "texto": "Oficina" }
+          ]
+        },
+        {
+          "nombre": "negociacion",
+          "etiqueta": "Tipo de Negociación",
+          "tipo": "select",
+          "requerido": true,
+          "opciones": [
+            { "valor": "venta", "texto": "Venta" },
+            { "valor": "arriendo", "texto": "Arriendo" }
+          ]
+        },
+        {
+          "nombre": "descripcion",
+          "etiqueta": "Descripción detallada",
+          "tipo": "textarea",
+          "requerido": true,
+          "placeholder": "Describe tu propiedad en detalle, incluyendo acabados, beneficios del sector, etc."
+        }
+      ]
+    },
+    {
+      "titulo": "Características",
+      "descripcion": "Detalles del espacio y amenidades del inmueble.",
+      "columnas": 3,
+      "campos": [
+        {
+          "nombre": "area",
+          "etiqueta": "Área (m²)",
+          "tipo": "number",
+          "requerido": true,
+          "placeholder": "120"
+        },
+        {
+          "nombre": "habitaciones",
+          "etiqueta": "Habitaciones",
+          "tipo": "number",
+          "requerido": true,
+          "placeholder": "3"
+        },
+        {
+          "nombre": "banos",
+          "etiqueta": "Baños",
+          "tipo": "number",
+          "requerido": true,
+          "placeholder": "2"
+        },
+        {
+          "nombre": "parqueaderos",
+          "etiqueta": "Parqueaderos",
+          "tipo": "number",
+          "requerido": false,
+          "placeholder": "1"
+        },
+        {
+          "nombre": "antiguedad",
+          "etiqueta": "Antigüedad (años)",
+          "tipo": "number",
+          "requerido": false,
+          "placeholder": "5"
+        }
+      ]
+    },
+    {
+      "titulo": "Ubicación y Contacto",
+      "descripcion": "Información de la dirección y datos para que los interesados te contacten.",
+      "columnas": 2,
+      "campos": [
+        {
+          "nombre": "departamento",
+          "etiqueta": "Departamento",
+          "tipo": "text",
+          "requerido": true,
+          "placeholder": "Ej: Cundinamarca"
+        },
+        {
+          "nombre": "ciudad",
+          "etiqueta": "Ciudad",
+          "tipo": "text",
+          "requerido": true,
+          "placeholder": "Ej: Bogotá D.C."
+        },
+        {
+          "nombre": "barrio",
+          "etiqueta": "Barrio",
+          "tipo": "text",
+          "requerido": true,
+          "placeholder": "Ej: Chapinero"
+        },
+        {
+          "nombre": "direccion",
+          "etiqueta": "Dirección exacta",
+          "tipo": "text",
+          "requerido": true,
+          "placeholder": "Ej: Calle 90 # 10-25"
+        },
+        {
+          "nombre": "nombreContacto",
+          "etiqueta": "Nombre de Contacto",
+          "tipo": "text",
+          "requerido": true,
+          "placeholder": "Ej: Juan Pérez"
+        },
+        {
+          "nombre": "telefonoContacto",
+          "etiqueta": "Teléfono",
+          "tipo": "number",
+          "requerido": true,
+          "placeholder": "3101234567"
+        },
+        {
+          "nombre": "emailContacto",
+          "etiqueta": "Correo electrónico",
+          "tipo": "email",
+          "requerido": true,
+          "placeholder": "ejemplo@dominio.com"
+        }
+      ]
+    },
+    {
+      "titulo": "Imágenes",
+      "descripcion": "Sube hasta 20 fotos en alta resolución de tu propiedad.",
+      "columnas": 1,
+      "campos": [
+        {
+          "nombre": "imagenes",
+          "etiqueta": "Seleccionar Fotos",
+          "tipo": "file",
+          "multiple": true,
+          "requerido": true
+        }
+      ]
+    }
+  ]
+}

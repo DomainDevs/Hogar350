@@ -1,0 +1,142 @@
+[
+
+  {
+    "nombre": "Cundinamarca",
+    "codigo": "01",
+    "municipios": [
+      {
+        "nombre": "Bogotá",
+        "codigo": "01",
+        "localidades": [
+          {
+            "nombre": "Chapinero",
+            "codigo": "01",
+            "barrios": [
+              { "codigo": "11001", "nombre": "Bellavista" },
+              { "codigo": "11002", "nombre": "Emaús" },
+              { "codigo": "11003", "nombre": "Las Acacias" },
+              { "codigo": "11003", "nombre": "Chicó Alto" },
+              { "codigo": "11003", "nombre": "El Refugio" },
+              { "codigo": "11003", "nombre": "Los Rosales" },
+              { "codigo": "11003", "nombre": "Seminario" },
+              { "codigo": "11003", "nombre": "Toscana" }
+            ]
+          },
+          {
+            "nombre": "Suba",
+            "codigo": "02",
+            "barrios": [
+              { "codigo": "11001", "nombre": "Suba Centro" },
+              { "codigo": "11002", "nombre": "La Campiña" },
+              { "codigo": "11003", "nombre": "Pinares" },
+              { "codigo": "11004", "nombre": "Tuna Baja" },
+              { "codigo": "11005", "nombre": "La Pradera" }
+            ]
+          }
+        ]
+      },
+      {
+        "nombre": "Soacha",
+        "codigo": "02",
+        "localidades": [
+          {
+            "nombre": "Comuna 1",
+            "codigo": "01",
+            "barrios": [
+              { "codigo": "11005", "nombre": "Ciudad Verde" },
+              { "codigo": "11006", "nombre": "San Mateo" }
+            ]
+          },
+          {
+            "nombre": "Comuna 2",
+            "codigo": "02",
+            "barrios": [
+              { "codigo": "11007", "nombre": "León XIII" },
+              { "codigo": "11008", "nombre": "Terreros" }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "nombre": "Antioquia",
+    "codigo": "01",
+    "municipios": [
+      {
+        "nombre": "Medellín",
+        "codigo": "01",
+        "localidades": [
+          {
+            "nombre": "El Poblado",
+            "codigo": "01",
+            "barrios": [
+              { "codigo": "12001", "nombre": "Provenza" },
+              { "codigo": "12002", "nombre": "La Florida" }
+            ]
+          },
+          {
+            "nombre": "Laureles",
+            "codigo": "02",
+            "barrios": [
+              { "codigo": "12003", "nombre": "San Joaquín" },
+              { "codigo": "12004", "nombre": "Conquistadores" }
+            ]
+          }
+        ]
+      },
+      {
+        "nombre": "Envigado",
+        "codigo": "02",
+        "localidades": [
+          {
+            "nombre": "Zona Centro",
+            "codigo": "01",
+            "barrios": [
+              { "codigo": "12005", "nombre": "El Dorado" },
+              { "codigo": "12006", "nombre": "San Marcos" }
+            ]
+          },
+          {
+            "nombre": "Zona Norte",
+            "codigo": "02",
+            "barrios": [
+              { "codigo": "12007", "nombre": "La Paz" },
+              { "codigo": "12008", "nombre": "Milán Vallejuelos" }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "nombre": "Santander",
+    "codigo": "03",
+    "municipios": [
+      {
+        "nombre": "Bucaramanga",
+        "codigo": "01",
+        "localidades": [
+          {
+            "nombre": "Centro",
+            "codigo": "01",
+            "barrios": [
+              { "codigo": "13001", "nombre": "Cabecera del Llano" },
+              { "codigo": "13002", "nombre": "San Alonso" },
+              { "codigo": "13003", "nombre": "Antonia Santos" }
+            ]
+          },
+          {
+            "nombre": "Occidente",
+            "codigo": "02",
+            "barrios": [
+              { "codigo": "13004", "nombre": "Mutis" },
+              { "codigo": "13005", "nombre": "Morrorico" },
+              { "codigo": "13006", "nombre": "Chapinero" }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

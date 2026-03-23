@@ -1,0 +1,6 @@
+[
+  { "id": 1, "label": "Todas" },
+  { "id": 2, "label": "Vivienda nueva" },
+  { "id": 3, "label": "Vivienda usada" },
+  { "id": 4, "label": "Vivienda nueva y usada" }
+]

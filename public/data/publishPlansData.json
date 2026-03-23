@@ -1,0 +1,87 @@
+{
+  "mainTitle": "Planes para publicar tu inmueble",
+  "mainSubtitle": "Elige el plan acorde a tu necesidad, impulsa la venta o arriendo de tus propiedades con mayor visibilidad y herramientas profesionales.",
+  "topLink": {
+    "text": "Planes a medida para Inmobiliarias y Constructoras",
+    "url": "#"
+  },
+  "plans": [
+    {
+      "id": "plan-x5",
+      "title": "Plan x5",
+      "duration": "90 días por publicación",
+      "isNew": true,
+      "features": [
+        { "type": "check", "text": "Publica hasta 5 Inmuebles" },
+        { "type": "info", "text": "Mayor visibilidad en los resultados de busqueda.", "highlight": true },
+        { "type": "check", "text": "Precio sugerido para cada inmueble. Sólo para casa y apartamentos ubicados en Bogotá." },
+        { "type": "check", "text": "Carga hasta 20 fotos, por inmueble." },
+        { "type": "check", "text": "Sube 1 video por inmueble desde YouTube." }
+      ],
+      "oldPrice": 200000,
+      "price": 170000,
+      "discount": 15,
+      "priceDescription": null,
+      "buttonText": "Comprar Plan x5",
+      "buttonVariant": "primary",
+      "highlight": true
+    },
+    {
+      "id": "plan-x3",
+      "title": "Plan x3",
+      "duration": "90 días de publicación",
+      "isNew": false,
+      "features": [
+        { "type": "check", "text": "Publica hasta 3 Inmuebles." },
+        { "type": "info", "text": "Aparecerá entre los primeros resultados de busqueda.", "highlight": true },
+        { "type": "check", "text": "Precio sugerido para cada inmueble. Aplica para casas y apartamentos ubicados en Bogotá" },
+        { "type": "check", "text": "Carga hasta 20 fotos por inmueble." },
+        { "type": "check", "text": "Sube 1 video por inmueble desde YouTube." }
+      ],
+      "oldPrice": 120000,
+      "price": 105000,
+      "discount": 12.5,
+      "priceDescription": null,
+      "buttonText": "Comprar Plan x3",
+      "buttonVariant": "primary",
+      "highlight": false
+    },
+    {
+      "id": "plan-basico",
+      "title": "Plan Básico",
+      "duration": "90 días de publicación",
+      "isNew": false,
+      "features": [
+        { "type": "check", "text": "Publica 1 Inmueble" },
+        { "type": "check", "text": "Precio sugerido de tu inmueble. Aplica para casas y apartamentos ubicados en Bogotá" },
+        { "type": "check", "text": "Carga hasta 15 fotos." },
+        { "type": "check", "text": "Sube 1 video desde YouTube." }
+      ],
+      "oldPrice": null,
+      "price": 40000,
+      "discount": null,
+      "priceDescription": null,
+      "buttonText": "Publicar mi inmueble",
+      "buttonVariant": "primary",
+      "highlight": false
+    },
+    {
+      "id": "plan-gratis",
+      "title": "Plan personal",
+      "duration": "30 días por publicación",
+      "isNew": false,
+      "features": [
+        { "type": "check", "text": "2 Publicaciónes gratis" },
+        { "type": "info", "text": "No aplica para inmuebles en Bogotá, Cali, Medellín, o alrededores.", "highlight": true },
+        { "type": "check", "text": "Carga hasta 10 fotos." }
+      ],
+      "oldPrice": null,
+      "price": 0,
+      "discount": null,
+      "priceDescription": "Gratis",
+      "buttonText": "Publicar mi inmueble",
+      "buttonVariant": "default",
+      "highlight": false
+    }
+  ]
+}

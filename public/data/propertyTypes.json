@@ -1,0 +1,13 @@
+[
+  { "label": "Casa", "value": "Casa" },
+  { "label": "Apartamento", "value": "Apartamento" },
+  { "label": "Aparta estudio", "value": "Aparta-estudio" },
+  { "label": "Local comercial", "value": "Local-comercial" },
+  { "label": "Oficina", "value": "Oficina" },
+  { "label": "Bodega", "value": "Bodega" },
+  { "label": "Consultorio", "value": "Consultorio" },
+  { "label": "Lote", "value": "Lote" },
+  { "label": "Finca", "value": "Finca" },
+  { "label": "Edificio de oficinas", "value": "Edificio-oficinas" },
+  { "label": "Edificio de apartamentos", "value": "Edificio-apartamentos" }
+]

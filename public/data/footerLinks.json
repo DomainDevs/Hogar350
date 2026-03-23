@@ -1,0 +1,32 @@
+{
+  "columns": [
+    {
+      "title": "Empresa",
+      "links": [
+        {"text": "Acerca de nosotros", "url": "/about"},
+        {"text": "Espacio publicitarios", "url": "/careers"}
+      ]
+    },
+    {
+      "title": "Recursos",
+      "links": [
+        {"text": "Preguntas frecuentes", "url": "/faq"},
+        {"text": "Términos y condiciones", "url": "/terms"},
+        {"text": "Quejas, reclamos y sugerencias", "url": "/pqrs"}
+      ]
+    },
+    {
+      "title": "Propiedades",
+      "links": [
+        {"text": "Proyectos en planos", "url": "/flatprojects"},
+        {"text": "Publicar mi propiedad", "url": "/publicar"}
+      ]
+    }
+  ],
+  "socials": [
+    {"name": "Facebook", "url": "https://facebook.com/houm", "icon": "facebook-icon-placeholder.svg"},
+    {"name": "YouTube", "url": "https://youtube.com/houm", "icon": "youtube-icon-placeholder.svg"},
+    {"name": "Instagram", "url": "https://instagram.com/houm", "icon": "instagram-icon-placeholder.svg"},
+    {"name": "WhatsApp", "url": "https://wa.me/numerodehoum", "icon": "whatsapp-icon-placeholder.svg"}
+  ]
+}

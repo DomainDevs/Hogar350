@@ -1,0 +1,42 @@
+{
+  "pasos": [
+    {
+      "nombre": "informacionGeneral",
+      "titulo": "Información General",
+      "descripcion": "Datos básicos de la propiedad.",
+      "campos": [
+        { "nombre": "titulo", "etiqueta": "Título", "tipo": "text", "requerido": true },
+        { "nombre": "precio", "etiqueta": "Precio", "tipo": "number", "requerido": true }
+      ]
+    },
+    {
+      "nombre": "caracteristicas",
+      "titulo": "Características",
+      "descripcion": "Detalles del espacio.",
+      "campos": [
+        { "nombre": "area", "etiqueta": "Área (m²)", "tipo": "number", "requerido": true },
+        { "nombre": "habitaciones", "etiqueta": "Habitaciones", "tipo": "number", "requerido": true }
+      ]
+    },
+    {
+      "nombre": "ubicacion",
+      "titulo": "Ubicación y Contacto",
+      "campos": [
+        { "nombre": "ciudad", "etiqueta": "Ciudad", "tipo": "text", "requerido": true },
+        { "nombre": "emailContacto", "etiqueta": "Email", "tipo": "email", "requerido": true }
+      ]
+    },
+    {
+      "nombre": "imagenes",
+      "titulo": "Fotos del Inmueble",
+      "campos": [
+        { "nombre": "fotos", "etiqueta": "Subir fotos", "tipo": "file", "multiple": true }
+      ]
+    },
+    {
+      "nombre": "final",
+      "titulo": "Resumen y Publicación",
+      "componente": "FinalStep"
+    }
+  ]
+}

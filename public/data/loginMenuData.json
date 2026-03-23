@@ -1,0 +1,78 @@
+
+[
+  {
+    "title": "Publicar inmueble",
+    "link": "/publicar",
+    "enabled": true,
+    "highlight": true,
+    "submenu": []
+  },
+  {
+    "title": "Planes",
+    "link": "/planes",
+    "enabled": true,
+    "highlight": false,
+    "submenu": []
+  },
+  {
+    "title": "Empresas",
+    "link": "#",
+    "enabled": true,
+    "highlight": false,
+    "submenu": [
+      {
+        "title": "Constructoras",
+        "link": "/servicios/Constructoras",
+        "enabled": true,
+        "highlight": false
+      },
+      {
+        "title": "Inmobiliarias",
+        "link": "/servicios/Inmobiliarias",
+        "enabled": true,
+        "highlight": false
+      },
+      {
+        "title": "Sección publicitaria",
+        "link": "/servicios/Seccion publicitaria",
+        "enabled": true,
+        "highlight": false
+      },
+      {
+        "title": "Consultoría",
+        "link": "/servicios/consultoria",
+        "enabled": false,
+        "highlight": false
+      },
+	  {
+		"title": "About",
+		"link": "/about",
+		"enabled": true,
+		"highlight": false,
+		"submenu": []
+	  }
+	  
+	  
+    ]
+  },
+  {
+    "title": "Usuario",
+    "link": "#",
+    "enabled": true,
+    "highlight": false,
+    "submenu": [
+      {
+        "title": "Actualizar datos",
+        "link": "/servicios/updateuser",
+        "enabled": true,
+        "highlight": false
+      },
+      {
+        "title": "Cerrar sesión",
+        "link": "/servicios/logout",
+        "enabled": true,
+        "highlight": false
+      }
+    ]
+  }
+]

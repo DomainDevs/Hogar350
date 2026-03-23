@@ -1,0 +1,50 @@
+[
+  {
+    "title": "Publicar inmueble",
+    "link": "/publicar",
+    "enabled": true,
+    "highlight": true,
+    "submenu": []
+  },
+  {
+    "title": "Servicios",
+    "link": "#",
+    "enabled": true,
+    "highlight": false,
+    "submenu": [
+      {
+        "title": "Constructoras",
+        "link": "/servicios/Constructoras",
+        "enabled": true,
+        "highlight": false
+      },
+      {
+        "title": "Consultoría",
+        "link": "/servicios/consultoria",
+        "enabled": false,
+        "highlight": false
+      }
+    ]
+  },
+  {
+    "title": "Contacto",
+    "link": "/contacto",
+    "enabled": true,
+    "highlight": false,
+    "submenu": []
+  },
+  {
+    "title": "About",
+    "link": "/about",
+    "enabled": true,
+    "highlight": false,
+    "submenu": []
+  },
+  {
+    "title": "Noticias",
+    "link": "/noticias",
+    "enabled": false,
+    "highlight": false,
+    "submenu": []
+  }
+]

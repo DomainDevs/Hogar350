@@ -1,0 +1,12 @@
+[
+  { "id": "010101", "ciudadId": "0101", "ciudad": "Bogotá", "nombre": "Chapinero", "lat": 4.655, "lng": -74.063 },
+  { "id": "010102", "ciudadId": "0101", "ciudad": "Bogotá", "nombre": "Suba", "lat": 4.720, "lng": -74.090 },
+  { "id": "010103", "ciudadId": "0101", "ciudad": "Bogotá", "nombre": "Usaquén", "lat": 4.750, "lng": -74.030 },
+  { "id": "010104", "ciudadId": "0101", "ciudad": "Bogotá", "nombre": "Usme", "lat": 4.550, "lng": -74.160 },
+  { "id": "010105", "ciudadId": "0101", "ciudad": "Bogotá", "nombre": "Tunjuelito", "lat": 4.600, "lng": -74.100 },
+  { "id": "020101", "ciudadId": "0201", "ciudad": "Medellín", "nombre": "Popular", "lat": 6.3008, "lng": -75.5583 },
+  { "id": "020102", "ciudadId": "0201", "ciudad": "Medellín", "nombre": "Santa Cruz", "lat": 6.3060, "lng": -75.5454 },
+  { "id": "020103", "ciudadId": "0201", "ciudad": "Medellín", "nombre": "Manrique", "lat": 6.2787, "lng": -75.5509 },
+  { "id": "020104", "ciudadId": "0201", "ciudad": "Medellín", "nombre": "Aranjuez", "lat": 6.2810, "lng": -75.5664 },
+  { "id": "020114", "ciudadId": "0201", "ciudad": "Medellín", "nombre": "El Poblado", "lat": 6.2088, "lng": -75.5676 }
+]

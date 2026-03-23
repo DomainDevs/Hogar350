@@ -1,0 +1,6 @@
+[
+  { "id": "01010101", "localidadId": "010101", "nombre": "El Nogal" },
+  { "id": "01010102", "localidadId": "010101", "nombre": "Los Rosales" },
+  { "id": "01010201", "localidadId": "010102", "nombre": "La Alhambra" },
+  { "id": "02010101", "localidadId": "020101", "nombre": "La Milla de Oro" }
+]

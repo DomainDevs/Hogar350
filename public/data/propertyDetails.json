@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "titulo": "Casa Moderna en Bogotá",
+    "precio": 450000000,
+    "direccion": "Cra 45 # 123 - 45, Bogotá",
+    "ciudad": "Bogotá",
+    "barrio": "Chapinero Alto",
+    "tipo": "Casa",
+    "estado": "Venta",
+    "area": 180,
+    "habitaciones": 3,
+    "banos": 2,
+    "parqueaderos": 1,
+    "descripcion": "Hermosa casa de 2 pisos con jardín y garaje. Ubicada en zona tranquila y segura, cerca a colegios y centros comerciales.",
+    "caracteristicas": [
+      "Jardín privado",
+      "Cocina integral",
+      "Balcón",
+      "Vigilancia 24h"
+    ],
+    "imagenes": [
+      "/images/VIVIENDA/APTO1/432098493_438345925265960_1544368455611767640_n.jpg",
+      "/images/VIVIENDA/APTO1/457105045_827982976149693_6406213538283125319_n.jpg"
+    ],
+    "contacto": {
+      "nombre": "Juan Pérez",
+      "telefono": "+57 300 123 4567",
+      "email": "juanperez@example.com"
+    }
+  },
+  {
+    "id": 2,
+    "titulo": "Casa Moderna en Bogotá",
+    "precio": 450000000,
+    "direccion": "Cra 45 # 123 - 45, Bogotá",
+    "ciudad": "Bogotá",
+    "barrio": "Chapinero Alto",
+    "tipo": "Casa",
+    "estado": "Venta",
+    "area": 180,
+    "habitaciones": 3,
+    "banos": 2,
+    "parqueaderos": 1,
+    "descripcion": "Hermosa casa de 2 pisos con jardín y garaje. Ubicada en zona tranquila y segura, cerca a colegios y centros comerciales.",
+    "caracteristicas": [
+      "Jardín privado",
+      "Cocina integral",
+      "Balcón",
+      "Vigilancia 24h"
+    ],
+    "imagenes": [
+      "/images/VIVIENDA/APTO1/432098493_438345925265960_1544368455611767640_n.jpg",
+      "/images/VIVIENDA/APTO1/457105045_827982976149693_6406213538283125319_n.jpg"
+    ],
+    "contacto": {
+      "nombre": "Juan Pérez",
+      "telefono": "+57 300 123 4567",
+      "email": "juanperez@example.com"
+    }
+  }
+]

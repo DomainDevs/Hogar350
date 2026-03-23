@@ -1,0 +1,78 @@
+[
+  {
+    "id": 1,
+    "titulo": "Casa Moderna en Bogotá",
+    "precio": 450000000,
+    "direccion": "Cra 45 # 123 - 45, Bogotá",
+    "ciudad": "Bogotá",
+    "barrio": "Chapinero Alto",
+    "tipo": "Casa",
+    "estado": "Venta",
+    "area": 180,
+    "habitaciones": 3,
+    "banos": 2,
+    "parqueaderos": 1,
+    "descripcion": "Hermosa casa de 2 pisos con jardín y garaje. Ubicada en zona tranquila y segura, cerca a colegios y centros comerciales.",
+    "caracteristicas": [
+      "Jardín privado",
+      "Cocina integral",
+      "Balcón",
+      "Vigilancia 24h",
+	  "administración",
+	  "azona asados",
+	  "tienda",
+	  "peluqueria"
+    ],
+    "imagenes": [
+      "/images/VIVIENDA/APTO1/432098493_438345925265960_1544368455611767640_n.jpg",
+      "/images/VIVIENDA/APTO1/457105045_827982976149693_6406213538283125319_n.jpg",
+      "/images/VIVIENDA/APTO1/457168371_827982842816373_3727858010706097284_n.jpg",
+      "/images/VIVIENDA/APTO1/457186688_827983366149654_7594377493481280389_n.jpg",
+      "/images/VIVIENDA/APTO1/457226325_827982942816363_6814963315113803107_n.jpg"
+    ],
+    "contacto": {
+      "nombre": "Juan Pérez",
+      "telefono": "+57 300 123 4567",
+      "email": "juanperez@example.com"
+    },
+    "ubicacion": {
+      "lat": 4.6482837,
+      "lng": -74.0654031
+    }
+  },
+  {
+    "id": 2,
+    "titulo": "Apartamento en Bogotá",
+    "precio": 380000000,
+    "direccion": "Calle 85 # 15 - 25, Bogotá",
+    "ciudad": "Bogotá",
+    "barrio": "Zona Rosa",
+    "tipo": "Apartamento",
+    "estado": "Venta",
+    "area": 95,
+    "habitaciones": 2,
+    "banos": 2,
+    "parqueaderos": 1,
+    "descripcion": "Apartamento moderno en la zona rosa de Bogotá, cerca a restaurantes, centros comerciales y transporte público.",
+    "caracteristicas": [
+      "Balcón con vista",
+      "Parqueadero cubierto",
+      "Gimnasio",
+      "Portería 24h",
+	  "Piscina"
+    ],
+    "imagenes": [
+      "/images/VIVIENDA/APTO1/432098493_438345925265960_1544368455611767640_n.jpg",
+      "/images/VIVIENDA/APTO1/457105045_827982976149693_6406213538283125319_n.jpg"
+    ],
+    "contacto": {
+      "nombre": "Juan Pérez",
+      "telefono": "+57 300 123 4567",
+      "email": "juanperez@example.com"
+    },
+    "ubicacion": {
+      "lat": 4.648284,
+      "lng": -74.065403
+    }
+  }
+]

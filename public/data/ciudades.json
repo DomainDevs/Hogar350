@@ -1,0 +1,4 @@
+[
+  { "id": "0101", "departamentoId": "01", "nombre": "Bogotá" },
+  { "id": "0201", "departamentoId": "02", "nombre": "Medellín" }
+]
