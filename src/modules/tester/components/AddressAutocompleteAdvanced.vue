@@ -1,11 +1,17 @@
 <template>
   <div class="relative">
+
+    <DepartmentCitySelector
+      @update:departamento="d => form.departamento = d"
+      @update:ciudad="onCiudadSelected"
+    />
+
     <input 
       type="text" 
       v-model="query" 
       @input="onInput" 
       placeholder="Escriba la calle y número"
-      class="border px-2 py-1 w-full rounded"
+      class="border px-2 py-1 w-full rounded mt-2"
     />
     <ul v-if="results.length" class="suggestions absolute z-10 w-full bg-white border rounded mt-1 max-h-40 overflow-y-auto">
       <li 
@@ -17,30 +23,33 @@
         {{ r.display_name }}
       </li>
     </ul>
+
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import DepartmentCitySelector from '@/modules/tester/components/LocationSelector.vue'
 
 const todasLocalidades = ref([])
+const municipios = ref([])  // 📌 cargar municipios con lat/lng
+const form = ref({ departamento: null, ciudad: null })
 
 onMounted(async () => {
   try {
     const res = await fetch('/data/localidades.json')
     todasLocalidades.value = await res.json()
     console.log("Localidades cargadas:", todasLocalidades.value)
+
+    const cityRes = await fetch('/data/municipios.json')
+    municipios.value = await cityRes.json()
   } catch (err) {
-    console.error('Error al cargar localidades', err)
-    todasLocalidades.value = []
+    console.error('Error al cargar datos', err)
   }
 })
 
 const props = defineProps({
   pais: { type: String, default: 'Colombia' },
-  departamento: String,
-  ciudad: String,
-  localidad: String,
   mapRef: Object
 })
 
@@ -56,24 +65,22 @@ function onInput() {
 }
 
 function searchLocal() {
-  if (!query.value || !props.ciudad) {
+  if (!query.value || !form.value.ciudad) {
     results.value = []
     return
   }
 
-  // Filtrar únicamente por ciudad y nombre
   const matches = todasLocalidades.value.filter(
     l =>
-      l.ciudad?.toLowerCase() === props.ciudad?.toLowerCase() &&
+      l.ciudad?.toLowerCase() === form.value.ciudad.nombre?.toLowerCase() &&
       l.nombre.toLowerCase().includes(query.value.toLowerCase())
   )
 
-  // Mapear usando los campos reales del JSON
   results.value = matches.map(l => ({
     display_name: `${l.nombre}, ${l.ciudad}, ${props.pais}`,
     lat: l.lat,
     lon: l.lng,
-    codigo: l.id // ⚡ aquí usamos el id de tu JSON
+    codigo: l.id
   }))
 }
 
@@ -87,6 +94,17 @@ function selectAddress(addr) {
 
   if (props.mapRef?.value) {
     props.mapRef.value.placeMarker(coordsObj.lat, coordsObj.lng, coordsObj.codigo)
+  }
+}
+
+// ✅ Nuevo: al seleccionar ciudad desde el selector
+function onCiudadSelected(ciudad) {
+  form.value.ciudad = ciudad
+  emit('update:ciudad', ciudad)
+
+  if (ciudad?.lat != null && ciudad?.lng != null && props.mapRef?.value) {
+    // Mover mapa a la ciudad seleccionada
+    props.mapRef.value.placeMarker(ciudad.lat, ciudad.lng, ciudad.id)
   }
 }
 </script>
@@ -107,6 +125,4 @@ function selectAddress(addr) {
   left: 0;
   z-index: 1400;
 }
-
-
 </style>

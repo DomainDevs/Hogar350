@@ -256,6 +256,12 @@
         </div>
         <div class="md:col-span-2"></div>
       </div>
+
+<DepartmentCitySelector
+  @update:departamento="d => form.departamento = d"
+  @update:ciudad="c => form.ciudad = c"
+/>
+
       <button type="button" @click="unlockSection(4)" class="btn-primary mt-8">Continuar Precios</button>
     </div>
 
@@ -377,6 +383,9 @@ import {
   validateTitulo, validateNombre, validateApellido, validaterazonSocial, validateTelefonoColombia, 
   validateEmail, validateDescripcion, validateDireccion 
 } from '@/modules/publication/utils/validators';
+
+import DepartmentCitySelector from '@/modules/tester/components/LocationSelector.vue'
+
 
 const router = useRouter();
 const blocked = ref(false);

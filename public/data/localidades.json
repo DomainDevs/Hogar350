@@ -1,5 +1,4 @@
 [
-	//Bogotá
 	{ "id": "0000101", "ciudadId": "00001", "ciudad": "Bogotá D.C.", "nombre": "Usaquén", "lat": 4.750, "lng": -74.030 },
 	{ "id": "0000102", "ciudadId": "00001", "ciudad": "Bogotá D.C.", "nombre": "Chapinero", "lat": 4.655, "lng": -74.063 },
 	{ "id": "0000103", "ciudadId": "00001", "ciudad": "Bogotá D.C.", "nombre": "Santa Fe", "lat": 4.610, "lng": -74.070 },
@@ -21,7 +20,6 @@
 	{ "id": "0000119", "ciudadId": "00001", "ciudad": "Bogotá D.C.", "nombre": "Ciudad Bolívar", "lat": 4.570, "lng": -74.130 },
 	{ "id": "0000120", "ciudadId": "00001", "ciudad": "Bogotá D.C.", "nombre": "Sumapaz", "lat": 4.340, "lng": -74.180 },
 	
-	//Medellín
 	{ "id": "0200101", "ciudadId": "02001", "ciudad": "Medellín", "nombre": "Popular", "lat": 6.3008, "lng": -75.5583 },
 	{ "id": "0200102", "ciudadId": "02001", "ciudad": "Medellín", "nombre": "Santa Cruz", "lat": 6.3060, "lng": -75.5454 },
 	{ "id": "0200103", "ciudadId": "02001", "ciudad": "Medellín", "nombre": "Manrique", "lat": 6.2787, "lng": -75.5509 },
@@ -39,7 +37,6 @@
 	{ "id": "0200115", "ciudadId": "02001", "ciudad": "Medellín", "nombre": "Santa Elena", "lat": 6.3450, "lng": -75.4950 },
 	{ "id": "0200116", "ciudadId": "02001", "ciudad": "Medellín", "nombre": "San Sebastián de Palmitas", "lat": 6.3400, "lng": -75.4800 },
 	
-	//Cali
 	{ "id": "3000101", "ciudadId": "30001", "ciudad": "Cali", "nombre": "Cali Centro", "lat": 3.4372, "lng": -76.5225 },
 	{ "id": "3000102", "ciudadId": "30001", "ciudad": "Cali", "nombre": "Santa Mónica", "lat": 3.4390, "lng": -76.5310 },
 	{ "id": "3000103", "ciudadId": "30001", "ciudad": "Cali", "nombre": "San Antonio", "lat": 3.4415, "lng": -76.5320 },
@@ -64,27 +61,23 @@
 	{ "id": "3000122", "ciudadId": "30001", "ciudad": "Cali", "nombre": "Comuna 21", "lat": 3.4950, "lng": -76.6250 },
 	{ "id": "3000123", "ciudadId": "30001", "ciudad": "Cali", "nombre": "Comuna 22", "lat": 3.5000, "lng": -76.6300 },
 	
-	//Barranquilla
 	{ "id": "0400101", "ciudadId": "04001", "ciudad": "Barranquilla", "nombre": "Centro", "lat": 10.9685, "lng": -74.7813 },
 	{ "id": "0400102", "ciudadId": "04001", "ciudad": "Barranquilla", "nombre": "Norte-Centro Histórico", "lat": 10.9930, "lng": -74.8020 },
 	{ "id": "0400103", "ciudadId": "04001", "ciudad": "Barranquilla", "nombre": "Sur-Oriente", "lat": 10.9400, "lng": -74.7800 },
 	{ "id": "0400104", "ciudadId": "04001", "ciudad": "Barranquilla", "nombre": "Sur-Occidente", "lat": 10.9250, "lng": -74.7900 },
 	{ "id": "0400105", "ciudadId": "04001", "ciudad": "Barranquilla", "nombre": "Rural y Suburbios", "lat": 10.9000, "lng": -74.8200 },
 	
-	//Cartagena
 	{ "id": "0500101", "ciudadId": "05001", "ciudad": "Cartagena", "nombre": "Centro Histórico", "lat": 10.4230, "lng": -75.5410 },
 	{ "id": "0500102", "ciudadId": "05001", "ciudad": "Cartagena", "nombre": "Bocagrande", "lat": 10.4055, "lng": -75.5300 },
 	{ "id": "0500103", "ciudadId": "05001", "ciudad": "Cartagena", "nombre": "Getsemaní", "lat": 10.4160, "lng": -75.5500 },
 	{ "id": "0500104", "ciudadId": "05001", "ciudad": "Cartagena", "nombre": "Pie de la Popa", "lat": 10.4220, "lng": -75.5400 },
 	{ "id": "0500105", "ciudadId": "05001", "ciudad": "Cartagena", "nombre": "Zona Norte y Suburbios", "lat": 10.4500, "lng": -75.5000 },
 	
-	//Bolivar
 	{ "id": "0500201", "ciudadId": "05002", "ciudad": "Magangué", "nombre": "Centro", "lat": 9.2400, "lng": -74.7200 },
 	{ "id": "0500202", "ciudadId": "05002", "ciudad": "Magangué", "nombre": "Barrios Periféricos", "lat": 9.2300, "lng": -74.7100 },
 	{ "id": "0500301", "ciudadId": "05003", "ciudad": "El Carmen de Bolívar", "nombre": "Centro", "lat": 9.7300, "lng": -75.2000 },
 	{ "id": "0500302", "ciudadId": "05003", "ciudad": "El Carmen de Bolívar", "nombre": "Barrios Periféricos", "lat": 9.7200, "lng": -75.1900 },
 	
-	//Boyacá
 	{ "id": "0600101", "ciudadId": "06001", "ciudad": "Tunja", "nombre": "Centro", "lat": 5.5350, "lng": -73.3670 },
 	{ "id": "0600102", "ciudadId": "06001", "ciudad": "Tunja", "nombre": "Barrios Periféricos", "lat": 5.5400, "lng": -73.3600 },
 	{ "id": "0600201", "ciudadId": "06002", "ciudad": "Duitama", "nombre": "Centro", "lat": 5.8250, "lng": -73.0300 },
@@ -92,7 +85,6 @@
 	{ "id": "0600301", "ciudadId": "06003", "ciudad": "Sogamoso", "nombre": "Centro", "lat": 5.7100, "lng": -72.9300 },
 	{ "id": "0600302", "ciudadId": "06003", "ciudad": "Sogamoso", "nombre": "Barrios Periféricos", "lat": 5.7150, "lng": -72.9200 },
 	
-	//Caldas
 	{ "id": "0700101", "ciudadId": "07001", "ciudad": "Manizales", "nombre": "Centro", "lat": 5.0700, "lng": -75.5200 },
 	{ "id": "0700102", "ciudadId": "07001", "ciudad": "Manizales", "nombre": "Barrios Periféricos", "lat": 5.0750, "lng": -75.5100 },
 	{ "id": "0700201", "ciudadId": "07002", "ciudad": "Chinchiná", "nombre": "Centro", "lat": 4.9700, "lng": -75.6600 },
@@ -100,43 +92,36 @@
 	{ "id": "0700301", "ciudadId": "07003", "ciudad": "La Dorada", "nombre": "Centro", "lat": 5.4200, "lng": -74.6500 },
 	{ "id": "0700302", "ciudadId": "07003", "ciudad": "La Dorada", "nombre": "Barrios Periféricos", "lat": 5.4250, "lng": -74.6400 },
 	
-	//Caquetá
 	{ "id": "0800101", "ciudadId": "08001", "ciudad": "Florencia", "nombre": "Centro", "lat": 1.6130, "lng": -75.6060 },
 	{ "id": "0800102", "ciudadId": "08001", "ciudad": "Florencia", "nombre": "Barrios Periféricos", "lat": 1.6180, "lng": -75.6000 },
 	{ "id": "0800201", "ciudadId": "08002", "ciudad": "Puerto Rico", "nombre": "Centro", "lat": 1.8130, "lng": -75.3600 },
 	{ "id": "0800202", "ciudadId": "08002", "ciudad": "Puerto Rico", "nombre": "Barrios Periféricos", "lat": 1.8180, "lng": -75.3500 },
 	
-	//Casanare
 	{ "id": "0900101", "ciudadId": "09001", "ciudad": "Yopal", "nombre": "Centro", "lat": 5.3200, "lng": -72.3950 },
 	{ "id": "0900102", "ciudadId": "09001", "ciudad": "Yopal", "nombre": "Barrios Periféricos", "lat": 5.3250, "lng": -72.3900 },
 	{ "id": "0900201", "ciudadId": "09002", "ciudad": "Aguazul", "nombre": "Centro", "lat": 5.3300, "lng": -72.2400 },
 	{ "id": "0900202", "ciudadId": "09002", "ciudad": "Aguazul", "nombre": "Barrios Periféricos", "lat": 5.3350, "lng": -72.2350 },
 	
-	//Cauca
 	{ "id": "1000101", "ciudadId": "10001", "ciudad": "Popayán", "nombre": "Centro", "lat": 2.4490, "lng": -76.6060 },
 	{ "id": "1000102", "ciudadId": "10001", "ciudad": "Popayán", "nombre": "Barrios Periféricos", "lat": 2.4540, "lng": -76.6000 },
 	{ "id": "1000201", "ciudadId": "10002", "ciudad": "Guapi", "nombre": "Centro", "lat": 2.5760, "lng": -77.8950 },
 	{ "id": "1000202", "ciudadId": "10002", "ciudad": "Guapi", "nombre": "Barrios Periféricos", "lat": 2.5810, "lng": -77.8900 },
 	
-	//Cesar
 	{ "id": "1100101", "ciudadId": "11001", "ciudad": "Valledupar", "nombre": "Centro", "lat": 10.4630, "lng": -73.2530 },
 	{ "id": "1100102", "ciudadId": "11001", "ciudad": "Valledupar", "nombre": "Barrios Periféricos", "lat": 10.4680, "lng": -73.2480 },
 	{ "id": "1100201", "ciudadId": "11002", "ciudad": "Aguachica", "nombre": "Centro", "lat": 8.3010, "lng": -73.6270 },
 	{ "id": "1100202", "ciudadId": "11002", "ciudad": "Aguachica", "nombre": "Barrios Periféricos", "lat": 8.3060, "lng": -73.6220 },
 	
-	//Chocó
 	{ "id": "1200101", "ciudadId": "12001", "ciudad": "Quibdó", "nombre": "Centro", "lat": 5.6920, "lng": -76.6610 },
 	{ "id": "1200102", "ciudadId": "12001", "ciudad": "Quibdó", "nombre": "Barrios Periféricos", "lat": 5.6970, "lng": -76.6560 },
 	{ "id": "1200201", "ciudadId": "12002", "ciudad": "Istmina", "nombre": "Centro", "lat": 5.1880, "lng": -76.6700 },
 	{ "id": "1200202", "ciudadId": "12002", "ciudad": "Istmina", "nombre": "Barrios Periféricos", "lat": 5.1930, "lng": -76.6650 },
 	
-	//Córdoba
 	{ "id": "1300101", "ciudadId": "13001", "ciudad": "Montería", "nombre": "Centro", "lat": 8.7570, "lng": -75.8810 },
 	{ "id": "1300102", "ciudadId": "13001", "ciudad": "Montería", "nombre": "Barrios Periféricos", "lat": 8.7620, "lng": -75.8760 },
 	{ "id": "1300201", "ciudadId": "13002", "ciudad": "Cereté", "nombre": "Centro", "lat": 8.8960, "lng": -75.8880 },
 	{ "id": "1300202", "ciudadId": "13002", "ciudad": "Cereté", "nombre": "Barrios Periféricos", "lat": 8.9010, "lng": -75.8830 },
 	
-	//Cundinamarca, excluyendo Bogotá D.C.
 	{ "id": "1400101", "ciudadId": "14001", "ciudad": "Soacha", "nombre": "Centro", "lat": 4.580, "lng": -74.220 },
 	{ "id": "1400102", "ciudadId": "14001", "ciudad": "Soacha", "nombre": "Barrios Periféricos", "lat": 4.585, "lng": -74.210 },
 
