@@ -32,14 +32,14 @@
         @change="onCiudadChange"
         class="input-style"
         :disabled="!selectedDepartamento"
-        :class="[errors.ciudad ? 'border-red-400 bg-red-50' : '']"
+        :class="[errors.municipio ? 'border-red-400 bg-red-50' : '']"
       >
         <option disabled value="">Seleccione municipio</option>
         <option v-for="c in ciudadesFiltradas" :key="c.id" :value="c.id">
           {{ c.nombre }}
         </option>
       </select>
-      <p v-if="errors.ciudad" class="error-msg">{{ errors.ciudad }}</p>
+      <p v-if="errors.municipio" class="error-msg">{{ errors.municipio }}</p>
     </div>
 
     <!-- Localidad -->
@@ -70,7 +70,7 @@ import { ref, computed, onMounted } from 'vue'
 
 const emit = defineEmits([
   'update:departamento',
-  'update:ciudad',
+  'update:municipio',
   'update:localidad',
   'update:map'
 ])
@@ -86,7 +86,7 @@ const selectedLocalidad = ref('')
 // Manejo de errores simple
 const errors = ref({
   departamento: '',
-  ciudad: '',
+  municipio: '',
   localidad: ''
 })
 
@@ -121,16 +121,16 @@ function onDepartamentoChange() {
   selectedLocalidad.value = ''
   const dep = departamentos.value.find(d => d.id === selectedDepartamento.value) || null
   emit('update:departamento', dep)
-  emit('update:ciudad', defaultBogota)
+  emit('update:municipio', defaultBogota)
   emit('update:localidad', defaultBogota)
 }
 
 function onCiudadChange() {
   selectedLocalidad.value = ''
-  const ciudad = ciudades.value.find(c => c.id === selectedCiudad.value)
-  if (!ciudad) return
-  const coordenadas = { lat: Number(ciudad.lat), lng: Number(ciudad.lng) }
-  emit('update:ciudad', { ...ciudad, ...coordenadas })
+  const municipio = ciudades.value.find(c => c.id === selectedCiudad.value)
+  if (!municipio) return
+  const coordenadas = { lat: Number(municipio.lat), lng: Number(municipio.lng) }
+  emit('update:municipio', { ...municipio, ...coordenadas })
   emit('update:localidad', defaultBogota)
   emit('update:map', coordenadas)
 }
@@ -139,9 +139,11 @@ function onLocalidadChange() {
   const loc = localidades.value.find(l => l.id === selectedLocalidad.value)
   if (!loc) return
   const coordenadas = { lat: Number(loc.lat), lng: Number(loc.lng) }
-  emit('update:ciudad', { ...loc, ...coordenadas })
+  emit('update:municipio', { ...loc, ...coordenadas })
   emit('update:map', coordenadas)
 }
+
+
 </script>
 
 <style scoped>

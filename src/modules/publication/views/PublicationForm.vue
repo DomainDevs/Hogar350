@@ -240,16 +240,33 @@
       </div>
       
       <!-- Solo un componente que maneja todo: departamento, municipio, localidad y dirección -->
-<LocationComponent 
-  @update:departamento="val => form.ubicacion.departamento = val?.nombre || ''"
-  @update:municipio="val => form.ubicacion.municipio = val?.nombre || ''"
-  @update:localidad="val => form.ubicacion.localidad = val?.nombre || ''"
-  @update:direccion="val => form.ubicacion.direccion = val"
-  @update:coords="val => {
-    form.ubicacion.lat = val.lat
-    form.ubicacion.lng = val.lng
-  }"
-/>
+    <LocationComponent
+      @update:departamento="val => { 
+        console.log('Municipio seleccionado:', val); 
+        form.ubicacion.departamento = val?.nombre || ''; 
+        validateField('departamento');
+      }"
+      @update:municipio="val => { 
+        console.log('Municipio seleccionado:', val); 
+        form.ubicacion.municipio = val?.nombre || ''; 
+        form.ubicacion.municipio = val?.nombre || ''; 
+        validateField('municipio'); 
+      }"
+      @update:localidad="val => { 
+        console.log('Municipio seleccionado:', val); 
+        form.ubicacion.localidad = val?.nombre || ''; 
+      }"
+      @update:direccion="val => { 
+        console.log('Municipio seleccionado:', val); 
+        form.ubicacion.direccion = val; 
+        validateField('direccion');
+      }"
+      @update:coords="val => { 
+        form.ubicacion.lat = val.lat; 
+        form.ubicacion.lng = val.lng; 
+      }"
+    />
+
 
       <button type="button" @click="unlockSection(4)" class="btn-primary mt-8">
         Continuar Precios
@@ -377,13 +394,9 @@ import {
 
 import LocationComponent from '@/modules/publication/components/LocationComponent.vue'
 
-
 const router = useRouter();
 const blocked = ref(false);
 const propertyTypesOptions = ref([]);
-
-const departamentosOptions = [{ label: 'Antioquia', value: 'Antioquia' }, { label: 'Cundinamarca', value: 'Cundinamarca' }];
-const ciudadesOptions = [{ label: 'Medellín', value: 'Medellin' }, { label: 'Bogotá', value: 'Bogota' }];
 
 const caracteristicasLabels = {
   habitaciones: 'Habitaciones', banos: 'Baños', parqueaderos: 'Parqueaderos',
@@ -486,7 +499,7 @@ const validateField = (field) => {
 
     case 'tiempoConstruccion': errors.tiempoConstruccion = c.tiempoConstruccion ? '' : 'Requerido'; break;
     case 'departamento': errors.departamento = u.departamento ? '' : 'Requerido'; break;
-    case 'ciudad': errors.ciudad = u.ciudad ? '' : 'Requerido'; break;
+    case 'municipio': errors.municipio = u.municipio ? '' : 'Requerido'; break;
     case 'direccion': errors.direccion = validateDireccion(u.direccion); break;
     case 'venta':
       if (g.tipoOferta === 'Vender'){
@@ -545,7 +558,7 @@ const unlockSection = (n) => {
   const sectionMapFields = {
     2: ['tipoInmueble', 'titulo', 'nombreContacto', 'apellidoContacto', 'numeroIdentificacion', 'telefonoContacto', 'emailContacto', 'descripcion'],
     3: ['area', 'areapv', 'estrato', 'piso', 'tiempoConstruccion'],
-    4: ['departamento', 'ciudad', 'direccion'],
+    4: ['departamento', 'municipio', 'direccion'],
     5: ['venta', 'arriendo', 'administracion', 'compartir']
   };
   const fields = sectionMapFields[n];

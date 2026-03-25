@@ -3,8 +3,9 @@
     <!-- Botón ubicación actual -->
     <button
       class="absolute z-10 top-2 right-2 bg-white shadow rounded px-2 py-1 text-sm hover:bg-gray-100"
-      @click="useMyLocation">
-      Mi ubicación
+      @click="useMyLocation"
+    >
+      📍 Mi ubicación
     </button>
 
     <div id="map" class="map"></div>
