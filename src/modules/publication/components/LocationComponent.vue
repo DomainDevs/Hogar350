@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-4">
-    <!-- Selectores -->
+    <!-- Selectores de ubicación -->
     <LocationSelector
       @update:departamento="onDepartamentoUpdate"
       @update:ciudad="onCiudadUpdate"
@@ -29,23 +29,29 @@ const mapLat = ref(null)
 const mapLng = ref(null)
 const mapCodigo = ref(null)
 
-// Selección departamento
+// ------------------------
+// Handlers de selección
+// ------------------------
+
+// Selección de departamento
 function onDepartamentoUpdate(dep) {
-  // opcional: manejar lógica si se requiere
+  // Mantener lógica original, opcional manejar algo adicional
   // console.log('Departamento seleccionado', dep)
 }
 
-// Selección municipio
+// Selección de ciudad o localidad (compatibilidad: siempre emite update:ciudad)
 function onCiudadUpdate(ciudad) {
-  mapLat.value = ciudad.lat
-  mapLng.value = ciudad.lng
+  if (!ciudad) return
+
+  mapLat.value = Number(ciudad.lat)
+  mapLng.value = Number(ciudad.lng)
   mapCodigo.value = ciudad.codigo
 
   // Centrar marcador en el mapa
   mapRef.value?.placeMarker(mapLat.value, mapLng.value)
 }
 
-// Cuando el marcador se mueve manualmente
+// Movimiento manual del marcador
 function onMapCoordsUpdate(coords) {
   mapLat.value = coords.lat
   mapLng.value = coords.lng
