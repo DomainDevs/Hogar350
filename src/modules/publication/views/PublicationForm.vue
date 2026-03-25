@@ -220,48 +220,40 @@
       <button type="button" @click="unlockSection(3)" class="btn-primary mt-8">Continuar a Ubicación</button>
     </div>
 
+    <!-- localización -->
     <div ref="section3" v-show="unlockedSections[3]" class="step-section">
       <h2 class="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
         <span class="w-7 h-7 rounded-md bg-orange-100 text-[#ff5500] flex items-center justify-center text-xs font-black">3</span>
         Ubicación
       </h2>
 
-      <!--
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label class="label-style">Departamento <span class="text-[#ff5500]">*</span></label>
-          <select v-model="form.ubicacion.departamento" @change="validateField('departamento')" class="input-style"
-            :class="[errors.departamento ? 'border-red-400 bg-red-50' : 'border-gray-200 focus:border-[#ff5500]']">
-            <option disabled value="">Selecciona</option>
-            <option v-for="dep in departamentosOptions" :key="dep.value" :value="dep.value">{{ dep.label }}</option>
-          </select>
-          <p v-if="errors.departamento" class="error-msg">{{ errors.departamento }}</p>
-        </div>
-        <div>
-          <label class="label-style">Ciudad <span class="text-[#ff5500]">*</span></label>
-          <select v-model="form.ubicacion.ciudad" @change="validateField('ciudad')" class="input-style"
-            :class="[errors.ciudad ? 'border-red-400 bg-red-50' : 'border-gray-200 focus:border-[#ff5500]']">
-            <option disabled value="">Selecciona</option>
-            <option v-for="city in ciudadesOptions" :key="city.value" :value="city.value">{{ city.label }}</option>
-          </select>
-          <p v-if="errors.ciudad" class="error-msg">{{ errors.ciudad }}</p>
-        </div>
-        <div class="md:col-span-2">
-          <label for="address" class="label-style">Dirección exacta <span class="text-[#ff5500]">*</span></label>
-          <input type="text" id="address" name="street-address" autocomplete="street-address"
-            v-model="form.ubicacion.direccion" 
-            @blur="validateField('direccion')" class="input-style" 
-            placeholder="Calle 123 # 45-67"
-            :class="[errors.direccion ? 'border-red-400 bg-red-50' : 'border-gray-200 focus:border-[#ff5500]']" 
-            />
-          <p v-if="errors.direccion" class="error-msg">{{ errors.direccion }}</p>
-        </div>
-        <div class="md:col-span-2"></div>
-      </div>
-      -->
-      <LocationComponent />
 
-      <button type="button" @click="unlockSection(4)" class="btn-primary mt-8">Continuar Precios</button>
+      <div class="md:col-span-2">
+        <label for="address" class="label-style">Dirección exacta <span class="text-[#ff5500]">*</span></label>
+        <input type="text" id="address" name="street-address" autocomplete="street-address"
+          v-model="form.ubicacion.direccion" 
+          @blur="validateField('direccion')" class="input-style" 
+          placeholder="Calle 123 # 45-67"
+          :class="[errors.direccion ? 'border-red-400 bg-red-50' : 'border-gray-200 focus:border-[#ff5500]']" 
+          />
+        <p v-if="errors.direccion" class="error-msg">{{ errors.direccion }}</p>
+      </div>
+      
+      <!-- Solo un componente que maneja todo: departamento, municipio, localidad y dirección -->
+    <LocationComponent 
+      @update:departamento="val => form.ubicacion.departamento = val?.nombre || ''"
+      @update:municipio="val => form.ubicacion.municipio = val?.nombre || ''"
+      @update:localidad="val => form.ubicacion.localidad = val?.nombre || ''"
+      @update:direccion="val => form.ubicacion.direccion = val"
+      @update:coords="val => {
+        form.ubicacion.lat = val.lat
+        form.ubicacion.lng = val.lng
+      }"
+    />
+
+      <button type="button" @click="unlockSection(4)" class="btn-primary mt-8">
+        Continuar Precios
+      </button>
     </div>
 
     <!-- Precios -->
@@ -407,7 +399,14 @@ const form = reactive({
     telefonoContacto: '', emailContacto: '', descripcion: '', videoUrl: '' 
   },
   caracteristicas: { habitaciones: 1, banos: 1, parqueaderos: 0, area: 0, areapv: 0, estrato: '', piso: '', tiempoConstruccion: '', aceptaMascotas: false },
-  ubicacion: { departamento: '', ciudad: '', direccion: '' },
+  ubicacion: { 
+    departamento: '',
+    municipio: '',
+    localidad: '',
+    direccion: '',
+    lat: null,
+    lng: null
+   },
   precios: { venta: 0, arriendo: 0, administracion: 0, compartir: 0 },
   imagenes: []
 });
