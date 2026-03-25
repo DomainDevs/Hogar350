@@ -240,16 +240,16 @@
       </div>
       
       <!-- Solo un componente que maneja todo: departamento, municipio, localidad y dirección -->
-    <LocationComponent 
-      @update:departamento="val => form.ubicacion.departamento = val?.nombre || ''"
-      @update:municipio="val => form.ubicacion.municipio = val?.nombre || ''"
-      @update:localidad="val => form.ubicacion.localidad = val?.nombre || ''"
-      @update:direccion="val => form.ubicacion.direccion = val"
-      @update:coords="val => {
-        form.ubicacion.lat = val.lat
-        form.ubicacion.lng = val.lng
-      }"
-    />
+<LocationComponent 
+  @update:departamento="val => form.ubicacion.departamento = val?.nombre || ''"
+  @update:municipio="val => form.ubicacion.municipio = val?.nombre || ''"
+  @update:localidad="val => form.ubicacion.localidad = val?.nombre || ''"
+  @update:direccion="val => form.ubicacion.direccion = val"
+  @update:coords="val => {
+    form.ubicacion.lat = val.lat
+    form.ubicacion.lng = val.lng
+  }"
+/>
 
       <button type="button" @click="unlockSection(4)" class="btn-primary mt-8">
         Continuar Precios

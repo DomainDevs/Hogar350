@@ -1,5 +1,8 @@
 <template>
   <div class="grid grid-cols-1 md:grid-cols-3 gap-4 py-3">
+
+
+          
     <!-- Departamento -->
     <div class="flex flex-col">
       <label class="label-style">

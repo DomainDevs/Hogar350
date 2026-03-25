@@ -29,6 +29,7 @@ const mapLat = ref(null)
 const mapLng = ref(null)
 const mapCodigo = ref(null)
 
+
 // ------------------------
 // Handlers de selección
 // ------------------------
