@@ -18,5 +18,22 @@
 	{ "id": "0000117", "departamentoId": "00", "municipioId": "00001", "nombre": "La Candelaria", "lat": 4.610000, "lng": -74.070000 },
 	{ "id": "0000118", "departamentoId": "00", "municipioId": "00001", "nombre": "Rafael Uribe Uribe", "lat": 4.600000, "lng": -74.080000 },
 	{ "id": "0000119", "departamentoId": "00", "municipioId": "00001", "nombre": "Ciudad Bolívar", "lat": 4.570000, "lng": -74.130000 },
-	{ "id": "0000120", "departamentoId": "00", "municipioId": "00001", "nombre": "Sumapaz", "lat": 4.340000, "lng": -74.180000 }	
+	{ "id": "0000120", "departamentoId": "00", "municipioId": "00001", "nombre": "Sumapaz", "lat": 4.340000, "lng": -74.180000 },
+	
+	{ "id": "0200101", "departamentoId": "02", "municipioId": "02001", "nombre": "Popular", "lat": 6.295000, "lng": -75.555000 },
+	{ "id": "0200102", "departamentoId": "02", "municipioId": "02001", "nombre": "Santa Cruz", "lat": 6.280000, "lng": -75.560000 },
+	{ "id": "0200103", "departamentoId": "02", "municipioId": "02001", "nombre": "Manrique", "lat": 6.270000, "lng": -75.550000 },
+	{ "id": "0200104", "departamentoId": "02", "municipioId": "02001", "nombre": "Aranjuez", "lat": 6.275000, "lng": -75.565000 },
+	{ "id": "0200105", "departamentoId": "02", "municipioId": "02001", "nombre": "Castilla", "lat": 6.300000, "lng": -75.580000 },
+	{ "id": "0200106", "departamentoId": "02", "municipioId": "02001", "nombre": "Doce de Octubre", "lat": 6.305000, "lng": -75.565000 },
+	{ "id": "0200107", "departamentoId": "02", "municipioId": "02001", "nombre": "Robledo", "lat": 6.285000, "lng": -75.600000 },
+	{ "id": "0200108", "departamentoId": "02", "municipioId": "02001", "nombre": "Villa Hermosa", "lat": 6.260000, "lng": -75.540000 },
+	{ "id": "0200109", "departamentoId": "02", "municipioId": "02001", "nombre": "Buenos Aires", "lat": 6.245000, "lng": -75.540000 },
+	{ "id": "0200110", "departamentoId": "02", "municipioId": "02001", "nombre": "La Candelaria", "lat": 6.250000, "lng": -75.570000 },
+	{ "id": "0200111", "departamentoId": "02", "municipioId": "02001", "nombre": "Laureles - Estadio", "lat": 6.255000, "lng": -75.590000 },
+	{ "id": "0200112", "departamentoId": "02", "municipioId": "02001", "nombre": "La América", "lat": 6.255000, "lng": -75.600000 },
+	{ "id": "0200113", "departamentoId": "02", "municipioId": "02001", "nombre": "San Javier", "lat": 6.260000, "lng": -75.610000 },
+	{ "id": "0200114", "departamentoId": "02", "municipioId": "02001", "nombre": "El Poblado", "lat": 6.210000, "lng": -75.570000 },
+	{ "id": "0200115", "departamentoId": "02", "municipioId": "02001", "nombre": "Guayabal", "lat": 6.220000, "lng": -75.580000 },
+	{ "id": "0200116", "departamentoId": "02", "municipioId": "02001", "nombre": "Belén", "lat": 6.230000, "lng": -75.600000 }
 ]

@@ -1,9 +1,19 @@
 [
-  { "id": "00001", "departamentoId": "00", "nombre": "Bogotá", "codigo": "001", "lat": 4.710988, "lng": -74.072090 },
-  { "id": "01001", "departamentoId": "01", "nombre": "Leticia", "codigo": "001", "lat": -4.215000, "lng": -69.940000 },
-  { "id": "01002", "departamentoId": "01", "nombre": "Puerto Nariño", "codigo": "002", "lat": -3.770000, "lng": -70.390000 },
-  { "id": "01003", "departamentoId": "01", "nombre": "La Chorrera", "codigo": "003", "lat": -4.800000, "lng": -69.950000 },
-  { "id": "01004", "departamentoId": "01", "nombre": "El Encanto", "codigo": "004", "lat": -3.560000, "lng": -70.350000 },
-  { "id": "01005", "departamentoId": "01", "nombre": "Tarapacá", "codigo": "005", "lat": -3.850000, "lng": -70.040000 },
-  { "id": "01006", "departamentoId": "01", "nombre": "Puerto Santander", "codigo": "006", "lat": -3.600000, "lng": -70.000000 }
+	{ "id": "00001", "departamentoId": "00", "nombre": "Bogotá", "codigo": "001", "lat": 4.710988, "lng": -74.072090 },
+	{ "id": "01001", "departamentoId": "01", "nombre": "Leticia", "codigo": "001", "lat": -4.215000, "lng": -69.940000 },
+	{ "id": "01002", "departamentoId": "01", "nombre": "Puerto Nariño", "codigo": "002", "lat": -3.770000, "lng": -70.390000 },
+	{ "id": "01003", "departamentoId": "01", "nombre": "La Chorrera", "codigo": "003", "lat": -4.800000, "lng": -69.950000 },
+	{ "id": "01004", "departamentoId": "01", "nombre": "El Encanto", "codigo": "004", "lat": -3.560000, "lng": -70.350000 },
+	{ "id": "01005", "departamentoId": "01", "nombre": "Tarapacá", "codigo": "005", "lat": -3.850000, "lng": -70.040000 },
+	{ "id": "01006", "departamentoId": "01", "nombre": "Puerto Santander", "codigo": "006", "lat": -3.600000, "lng": -70.000000 },
+	{ "id": "02001", "departamentoId": "02", "nombre": "Medellín", "codigo": "001", "lat": 6.244203, "lng": -75.581212 },
+	{ "id": "02002", "departamentoId": "02", "nombre": "Bello", "codigo": "002", "lat": 6.337320, "lng": -75.557954 },
+	{ "id": "02003", "departamentoId": "02", "nombre": "Itagüí", "codigo": "003", "lat": 6.184610, "lng": -75.599000 },
+	{ "id": "02004", "departamentoId": "02", "nombre": "Envigado", "codigo": "004", "lat": 6.170000, "lng": -75.583000 },
+	{ "id": "02005", "departamentoId": "02", "nombre": "Rionegro", "codigo": "005", "lat": 6.155000, "lng": -75.374000 },
+	{ "id": "02006", "departamentoId": "02", "nombre": "Apartadó", "codigo": "006", "lat": 7.883000, "lng": -76.632000 },
+	{ "id": "02007", "departamentoId": "02", "nombre": "Turbo", "codigo": "007", "lat": 8.092000, "lng": -76.728000 },
+	{ "id": "02008", "departamentoId": "02", "nombre": "Caucasia", "codigo": "008", "lat": 7.986000, "lng": -75.198000 },
+	{ "id": "02009", "departamentoId": "02", "nombre": "Santa Fe de Antioquia", "codigo": "009", "lat": 6.556000, "lng": -75.828000 },
+	{ "id": "02010", "departamentoId": "02", "nombre": "La Ceja", "codigo": "010", "lat": 6.030000, "lng": -75.431000 }
 ]

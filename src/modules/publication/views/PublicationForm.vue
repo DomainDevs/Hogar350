@@ -225,6 +225,8 @@
         <span class="w-7 h-7 rounded-md bg-orange-100 text-[#ff5500] flex items-center justify-center text-xs font-black">3</span>
         Ubicación
       </h2>
+
+      <!--
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label class="label-style">Departamento <span class="text-[#ff5500]">*</span></label>
@@ -256,11 +258,8 @@
         </div>
         <div class="md:col-span-2"></div>
       </div>
-
-<DepartmentCitySelector
-  @update:departamento="d => form.departamento = d"
-  @update:ciudad="c => form.ciudad = c"
-/>
+      -->
+      <LocationComponent />
 
       <button type="button" @click="unlockSection(4)" class="btn-primary mt-8">Continuar Precios</button>
     </div>
@@ -384,7 +383,7 @@ import {
   validateEmail, validateDescripcion, validateDireccion 
 } from '@/modules/publication/utils/validators';
 
-import DepartmentCitySelector from '@/modules/tester/components/LocationSelector.vue'
+import LocationComponent from '@/modules/publication/components/LocationComponent.vue'
 
 
 const router = useRouter();

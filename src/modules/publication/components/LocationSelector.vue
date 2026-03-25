@@ -2,48 +2,72 @@
   <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
 
     <!-- Departamento -->
-    <select v-model="selectedDepartamento" @change="onDepartamentoChange"
-      class="border px-2 py-1 rounded w-auto"
-    >
-      <option value="">Seleccione departamento</option>
-      <option 
-        v-for="d in departamentos" 
-        :key="d.id" 
-        :value="d.id"
+    <div class="flex flex-col">
+      <label for="departamento" class="text-sm font-medium mb-1">
+        Departamento
+      </label>
+      <select
+        id="departamento"
+        v-model="selectedDepartamento"
+        @change="onDepartamentoChange"
+        class="border px-2 py-1 rounded w-auto"
       >
-        {{ d.nombre }}
-      </option>
-    </select>
+        <option value="">Seleccione departamento</option>
+        <option 
+          v-for="d in departamentos" 
+          :key="d.id" 
+          :value="d.id"
+        >
+          {{ d.nombre }}
+        </option>
+      </select>
+    </div>
 
     <!-- Municipio -->
-    <select v-model="selectedCiudad" @change="onCiudadChange"
-      class="border px-2 py-1 rounded w-auto"
-      :disabled="!selectedDepartamento"
-    >
-      <option value="">Seleccione municipio</option>
-      <option 
-        v-for="c in ciudadesFiltradas" 
-        :key="c.id" 
-        :value="c.id"
+    <div class="flex flex-col">
+      <label for="municipio" class="text-sm font-medium mb-1">
+        Municipio
+      </label>
+      <select
+        id="municipio"
+        v-model="selectedCiudad"
+        @change="onCiudadChange"
+        class="border px-2 py-1 rounded w-auto"
+        :disabled="!selectedDepartamento"
       >
-        {{ c.nombre }}
-      </option>
-    </select>
+        <option value="">Seleccione municipio</option>
+        <option 
+          v-for="c in ciudadesFiltradas" 
+          :key="c.id" 
+          :value="c.id"
+        >
+          {{ c.nombre }}
+        </option>
+      </select>
+    </div>
 
     <!-- Localidad -->
-    <select v-model="selectedLocalidad" @change="onLocalidadChange"
-      class="border px-2 py-1 rounded w-auto"
-      :disabled="!selectedCiudad"
-    >
-      <option value="">Seleccione localidad</option>
-      <option 
-        v-for="l in localidadesFiltradas" 
-        :key="l.id" 
-        :value="l.id"
+    <div class="flex flex-col">
+      <label for="localidad" class="text-sm font-medium mb-1">
+        Localidad
+      </label>
+      <select
+        id="localidad"
+        v-model="selectedLocalidad"
+        @change="onLocalidadChange"
+        class="border px-2 py-1 rounded w-auto"
+        :disabled="!selectedCiudad"
       >
-        {{ l.nombre }}
-      </option>
-    </select>
+        <option value="">Seleccione localidad</option>
+        <option 
+          v-for="l in localidadesFiltradas" 
+          :key="l.id" 
+          :value="l.id"
+        >
+          {{ l.nombre }}
+        </option>
+      </select>
+    </div>
 
   </div>
 </template>
@@ -66,6 +90,9 @@ const selectedDepartamento = ref('')
 const selectedCiudad = ref('')
 const selectedLocalidad = ref('')
 
+// Datos por defecto de Bogotá
+const defaultBogota = { id: '00001', nombre: 'Bogotá D.C.', lat: 4.610, lng: -74.070 }
+
 // Cargar JSON al montar
 onMounted(async () => {
   try {
@@ -83,12 +110,12 @@ const ciudadesFiltradas = computed(() => {
   return ciudades.value.filter(c => String(c.departamentoId) === String(selectedDepartamento.value))
 })
 
-// Filtrar localidades por ciudad y departamento
+// Filtrar localidades por ciudad
 const localidadesFiltradas = computed(() => {
-  if (!selectedDepartamento.value || !selectedCiudad.value) return []
-  return localidades.value.filter(
-    l => String(l.departamentoId) === String(selectedDepartamento.value) &&
-         String(l.ciudadId) === String(selectedCiudad.value)
+  if (!selectedCiudad.value) return []
+  return localidades.value.filter(l =>
+    String(l.departamentoId) === String(selectedDepartamento.value) &&
+    String(l.municipioId) === String(selectedCiudad.value)
   )
 })
 
@@ -98,9 +125,11 @@ function onDepartamentoChange() {
   selectedLocalidad.value = ''
   const dep = departamentos.value.find(d => d.id === selectedDepartamento.value) || null
   emit('update:departamento', dep)
-  emit('update:ciudad', null)
-  emit('update:localidad', null)
-  // No actualizamos el mapa aquí
+  
+  // Reseteamos ciudad y localidad con Bogotá por defecto
+  emit('update:ciudad', defaultBogota)
+  emit('update:localidad', defaultBogota)
+  // No movemos el mapa todavía
 }
 
 // Cambio de ciudad
@@ -110,7 +139,7 @@ function onCiudadChange() {
   if (!ciudad) return
   const coordenadas = { lat: Number(ciudad.lat), lng: Number(ciudad.lng) }
   emit('update:ciudad', { ...ciudad, ...coordenadas })
-  emit('update:localidad', null)
+  emit('update:localidad', defaultBogota) // localidad aún vacía -> Bogotá
   emit('update:map', coordenadas)
 }
 
@@ -119,7 +148,8 @@ function onLocalidadChange() {
   const loc = localidades.value.find(l => l.id === selectedLocalidad.value)
   if (!loc) return
   const coordenadas = { lat: Number(loc.lat), lng: Number(loc.lng) }
-  emit('update:localidad', { ...loc, ...coordenadas })
+  //emit('update:localidad', { ...loc, ...coordenadas })
+  emit('update:ciudad', { ...loc, ...coordenadas })
   emit('update:map', coordenadas)
 }
 </script>
