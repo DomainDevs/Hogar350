@@ -249,8 +249,8 @@
       @update:municipio="val => { 
         console.log('Municipio seleccionado:', val); 
         form.ubicacion.municipio = val?.nombre || ''; 
-        form.ubicacion.municipio = val?.nombre || ''; 
-        validateField('municipio'); 
+        form.ubicacion.ciudad = val?.nombre || ''; 
+        validateField('ciudad'); 
       }"
       @update:localidad="val => { 
         console.log('Municipio seleccionado:', val); 
@@ -499,7 +499,7 @@ const validateField = (field) => {
 
     case 'tiempoConstruccion': errors.tiempoConstruccion = c.tiempoConstruccion ? '' : 'Requerido'; break;
     case 'departamento': errors.departamento = u.departamento ? '' : 'Requerido'; break;
-    case 'municipio': errors.municipio = u.municipio ? '' : 'Requerido'; break;
+    case 'ciudad': errors.ciudad = u.ciudad ? '' : 'Requerido'; break;
     case 'direccion': errors.direccion = validateDireccion(u.direccion); break;
     case 'venta':
       if (g.tipoOferta === 'Vender'){
@@ -558,7 +558,7 @@ const unlockSection = (n) => {
   const sectionMapFields = {
     2: ['tipoInmueble', 'titulo', 'nombreContacto', 'apellidoContacto', 'numeroIdentificacion', 'telefonoContacto', 'emailContacto', 'descripcion'],
     3: ['area', 'areapv', 'estrato', 'piso', 'tiempoConstruccion'],
-    4: ['departamento', 'municipio', 'direccion'],
+    4: ['departamento', 'ciudad', 'direccion'],
     5: ['venta', 'arriendo', 'administracion', 'compartir']
   };
   const fields = sectionMapFields[n];
