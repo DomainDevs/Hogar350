@@ -138,7 +138,17 @@ function onLocalidadChange() {
   const loc = localidades.value.find(l => l.id === selectedLocalidad.value)
   if (!loc) return
   const coordenadas = { lat: Number(loc.lat), lng: Number(loc.lng) }
-  emit('update:localidad', { ...loc, ...coordenadas })
+
+  // Emitir la localidad
+  emit('update:localidad', loc)
+
+  // 🔥 también emitir municipio para que el mapa se actualice
+  const municipio = municipios.value.find(m => m.id === selectedMunicipio.value)
+  if (municipio) {
+    emit('update:municipio', { ...municipio, ...coordenadas })
+  }
+
+  // Map siempre recibe las coordenadas de la localidad
   emit('update:map', coordenadas)
 }
 </script>
