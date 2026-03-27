@@ -3,7 +3,7 @@
     <!-- Selectores de ubicación -->
     <LocationSelector
       @update:departamento="onDepartamentoUpdate"
-      @update:ciudad="onCiudadUpdate"
+      @update:municipio="onMunicipioUpdate"
     />
 
     <!-- Mapa -->
@@ -29,7 +29,6 @@ const mapLat = ref(null)
 const mapLng = ref(null)
 const mapCodigo = ref(null)
 
-
 // ------------------------
 // Handlers de selección
 // ------------------------
@@ -40,13 +39,13 @@ function onDepartamentoUpdate(dep) {
   // console.log('Departamento seleccionado', dep)
 }
 
-// Selección de ciudad o localidad (compatibilidad: siempre emite update:ciudad)
-function onCiudadUpdate(ciudad) {
-  if (!ciudad) return
+// Selección de municipio o localidad (compatibilidad: siempre emite update:municipio)
+function onMunicipioUpdate(municipio) {
+  if (!municipio) return
 
-  mapLat.value = Number(ciudad.lat)
-  mapLng.value = Number(ciudad.lng)
-  mapCodigo.value = ciudad.codigo
+  mapLat.value = Number(municipio.lat)
+  mapLng.value = Number(municipio.lng)
+  mapCodigo.value = municipio.codigo
 
   // Centrar marcador en el mapa
   mapRef.value?.placeMarker(mapLat.value, mapLng.value)

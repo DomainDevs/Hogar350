@@ -212,7 +212,6 @@
               :class="[errors[key] ? 'border-red-400 bg-red-50' : 'border-gray-200 focus:border-[#ff5500]']" class="input-style pr-10" />
             <span v-if="key.includes('area')" class="absolute right-3 top-2.5 text-[10px] font-bold text-gray-400">M²</span>
           </div>
-
           <p v-if="errors[key]" class="error-msg">{{ errors[key] }}</p>
         </div>
       </div>
@@ -240,32 +239,13 @@
       </div>
       
       <!-- Solo un componente que maneja todo: departamento, municipio, localidad y dirección -->
-    <LocationComponent
-      @update:departamento="val => { 
-        console.log('Municipio seleccionado:', val); 
-        form.ubicacion.departamento = val?.nombre || ''; 
-        validateField('departamento');
-      }"
-      @update:municipio="val => { 
-        console.log('Municipio seleccionado:', val); 
-        form.ubicacion.municipio = val?.nombre || ''; 
-        form.ubicacion.ciudad = val?.nombre || ''; 
-        validateField('ciudad'); 
-      }"
-      @update:localidad="val => { 
-        console.log('Municipio seleccionado:', val); 
-        form.ubicacion.localidad = val?.nombre || ''; 
-      }"
-      @update:direccion="val => { 
-        console.log('Municipio seleccionado:', val); 
-        form.ubicacion.direccion = val; 
-        validateField('direccion');
-      }"
-      @update:coords="val => { 
-        form.ubicacion.lat = val.lat; 
-        form.ubicacion.lng = val.lng; 
-      }"
-    />
+<LocationComponent
+  @update:departamento="val => form.ubicacion.departamento = val?.nombre || ''"
+  @update:municipio="val => form.ubicacion.municipio = val?.nombre || ''"
+  @update:localidad="val => form.ubicacion.localidad = val?.nombre || ''"
+  @update:direccion="val => form.ubicacion.direccion = val"
+  @update:coords="val => { form.ubicacion.lat = val.lat; form.ubicacion.lng = val.lng; }"
+/>
 
 
       <button type="button" @click="unlockSection(4)" class="btn-primary mt-8">
@@ -499,7 +479,7 @@ const validateField = (field) => {
 
     case 'tiempoConstruccion': errors.tiempoConstruccion = c.tiempoConstruccion ? '' : 'Requerido'; break;
     case 'departamento': errors.departamento = u.departamento ? '' : 'Requerido'; break;
-    case 'ciudad': errors.ciudad = u.ciudad ? '' : 'Requerido'; break;
+    case 'municipio': errors.municipio = u.municipio ? '' : 'Requerido'; break;
     case 'direccion': errors.direccion = validateDireccion(u.direccion); break;
     case 'venta':
       if (g.tipoOferta === 'Vender'){
@@ -558,7 +538,7 @@ const unlockSection = (n) => {
   const sectionMapFields = {
     2: ['tipoInmueble', 'titulo', 'nombreContacto', 'apellidoContacto', 'numeroIdentificacion', 'telefonoContacto', 'emailContacto', 'descripcion'],
     3: ['area', 'areapv', 'estrato', 'piso', 'tiempoConstruccion'],
-    4: ['departamento', 'ciudad', 'direccion'],
+    4: ['departamento', 'municipio', 'direccion'],
     5: ['venta', 'arriendo', 'administracion', 'compartir']
   };
   const fields = sectionMapFields[n];
@@ -591,7 +571,6 @@ onMounted(async () => {
 
 const resetForm = () => { if (confirm('¿Limpiar todo el formulario, esto borraría la información registrada?')) { sessionStorage.removeItem('publicationForm'); location.reload(); }};
 const goPreview = () => router.push({ name: 'PublicationPreview' });
-
 const section1 = ref(null), section2 = ref(null), section3 = ref(null), section4 = ref(null), section5 = ref(null);
 
 //console.log(sessionStorage.getItem('publicationForm')); //ver sessionStorage
@@ -606,5 +585,4 @@ const section1 = ref(null), section2 = ref(null), section3 = ref(null), section4
 .btn-primary { @apply w-full sm:w-auto px-10 py-3.5 bg-gray-900 text-white font-bold rounded-lg hover:bg-black transition-all active:scale-95 text-xs uppercase tracking-widest; }
 .btn-submit { @apply flex items-center justify-center gap-2 px-10 py-3.5 bg-[#ff5500] text-white font-bold rounded-lg hover:bg-[#e64d00] transition-all shadow-md shadow-orange-100 active:scale-95 text-xs uppercase tracking-widest; }
 .btn-secondary { @apply flex items-center justify-center gap-2 px-6 py-3.5 text-gray-600 font-bold rounded-lg border border-gray-300 bg-white hover:bg-red-50 transition-all text-xs uppercase tracking-widest; }
-
 </style>

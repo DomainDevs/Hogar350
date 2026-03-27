@@ -1,8 +1,6 @@
 <template>
   <div class="grid grid-cols-1 md:grid-cols-3 gap-4 py-3">
 
-
-          
     <!-- Departamento -->
     <div class="flex flex-col">
       <label class="label-style">
@@ -28,18 +26,18 @@
         Municipio <span class="text-[#ff5500]">*</span>
       </label>
       <select
-        v-model="selectedCiudad"
-        @change="onCiudadChange"
+        v-model="selectedMunicipio"
+        @change="onMunicipioChange"
         class="input-style"
         :disabled="!selectedDepartamento"
-        :class="[errors.ciudad ? 'border-red-400 bg-red-50' : '']"
+        :class="[errors.municipio ? 'border-red-400 bg-red-50' : '']"
       >
         <option disabled value="">Seleccione municipio</option>
-        <option v-for="c in ciudadesFiltradas" :key="c.id" :value="c.id">
-          {{ c.nombre }}
+        <option v-for="m in municipiosFiltrados" :key="m.id" :value="m.id">
+          {{ m.nombre }}
         </option>
       </select>
-      <p v-if="errors.ciudad" class="error-msg">{{ errors.ciudad }}</p>
+      <p v-if="errors.municipio" class="error-msg">{{ errors.municipio }}</p>
     </div>
 
     <!-- Localidad -->
@@ -51,7 +49,7 @@
         v-model="selectedLocalidad"
         @change="onLocalidadChange"
         class="input-style"
-        :disabled="!selectedCiudad"
+        :disabled="!selectedMunicipio"
         :class="[errors.localidad ? 'border-red-400 bg-red-50' : '']"
       >
         <option disabled value="">Seleccione localidad</option>
@@ -70,23 +68,23 @@ import { ref, computed, onMounted } from 'vue'
 
 const emit = defineEmits([
   'update:departamento',
-  'update:ciudad',
+  'update:municipio',
   'update:localidad',
   'update:map'
 ])
 
 const departamentos = ref([])
-const ciudades = ref([])
+const municipios = ref([])
 const localidades = ref([])
 
 const selectedDepartamento = ref('')
-const selectedCiudad = ref('')
+const selectedMunicipio = ref('')
 const selectedLocalidad = ref('')
 
 // Manejo de errores simple
 const errors = ref({
   departamento: '',
-  ciudad: '',
+  municipio: '',
   localidad: ''
 })
 
@@ -96,41 +94,42 @@ const defaultBogota = { id: '00001', nombre: 'Bogotá D.C.', lat: 4.610, lng: -7
 onMounted(async () => {
   try {
     departamentos.value = await (await fetch('/data/departamentos.json')).json()
-    ciudades.value = await (await fetch('/data/municipios.json')).json()
+    municipios.value = await (await fetch('/data/municipios.json')).json()
     localidades.value = await (await fetch('/data/localidades.json')).json()
   } catch (err) {
     console.error('Error cargando datos', err)
   }
 })
 
-const ciudadesFiltradas = computed(() => {
+const municipiosFiltrados = computed(() => {
   if (!selectedDepartamento.value) return []
-  return ciudades.value.filter(c => String(c.departamentoId) === String(selectedDepartamento.value))
+  return municipios.value.filter(m => String(m.departamentoId) === String(selectedDepartamento.value))
 })
 
 const localidadesFiltradas = computed(() => {
-  if (!selectedCiudad.value) return []
+  if (!selectedMunicipio.value) return []
   return localidades.value.filter(l =>
     String(l.departamentoId) === String(selectedDepartamento.value) &&
-    String(l.municipioId) === String(selectedCiudad.value)
+    String(l.municipioId) === String(selectedMunicipio.value)
   )
 })
 
 function onDepartamentoChange() {
-  selectedCiudad.value = ''
+  selectedMunicipio.value = ''
   selectedLocalidad.value = ''
   const dep = departamentos.value.find(d => d.id === selectedDepartamento.value) || null
   emit('update:departamento', dep)
-  emit('update:ciudad', defaultBogota)
+  emit('update:municipio', defaultBogota)
   emit('update:localidad', defaultBogota)
+  emit('update:map', { lat: defaultBogota.lat, lng: defaultBogota.lng })
 }
 
-function onCiudadChange() {
+function onMunicipioChange() {
   selectedLocalidad.value = ''
-  const ciudad = ciudades.value.find(c => c.id === selectedCiudad.value)
-  if (!ciudad) return
-  const coordenadas = { lat: Number(ciudad.lat), lng: Number(ciudad.lng) }
-  emit('update:ciudad', { ...ciudad, ...coordenadas })
+  const municipio = municipios.value.find(m => m.id === selectedMunicipio.value)
+  if (!municipio) return
+  const coordenadas = { lat: Number(municipio.lat), lng: Number(municipio.lng) }
+  emit('update:municipio', { ...municipio, ...coordenadas })
   emit('update:localidad', defaultBogota)
   emit('update:map', coordenadas)
 }
@@ -139,11 +138,9 @@ function onLocalidadChange() {
   const loc = localidades.value.find(l => l.id === selectedLocalidad.value)
   if (!loc) return
   const coordenadas = { lat: Number(loc.lat), lng: Number(loc.lng) }
-  emit('update:ciudad', { ...loc, ...coordenadas })
+  emit('update:municipio', { ...loc, ...coordenadas })
   emit('update:map', coordenadas)
 }
-
-
 </script>
 
 <style scoped>
@@ -152,7 +149,4 @@ function onLocalidadChange() {
 .label-style { @apply block text-[14px] font-black text-gray-700 tracking-[0.15em] mb-2; }
 .input-style { @apply w-full px-6 py-3 rounded-lg border border-gray-200 outline-none transition-all text-sm placeholder:text-gray-300 focus:border-[#ff5500] focus:ring-2 focus:ring-orange-100; }
 .error-msg { @apply text-[#ff5500] text-[12px] font-bold mt-1.5 tracking-tight; }
-
-
 </style>
-
