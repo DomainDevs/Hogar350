@@ -138,7 +138,7 @@ function onLocalidadChange() {
   const loc = localidades.value.find(l => l.id === selectedLocalidad.value)
   if (!loc) return
   const coordenadas = { lat: Number(loc.lat), lng: Number(loc.lng) }
-  emit('update:municipio', { ...loc, ...coordenadas })
+  emit('update:localidad', { ...loc, ...coordenadas })
   emit('update:map', coordenadas)
 }
 </script>
