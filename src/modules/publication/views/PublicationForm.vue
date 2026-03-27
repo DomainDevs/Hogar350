@@ -240,9 +240,9 @@
       
       <!-- Solo un componente que maneja todo: departamento, municipio, localidad y dirección -->
         <LocationComponent
-          @update:departamento="val => form.ubicacion.departamento = val?.nombre || ''"
-          @update:municipio="val => form.ubicacion.municipio = val?.nombre ?? val ?? ''"
-          @update:localidad="val => form.ubicacion.localidad = val?.nombre ?? val ?? ''"
+          @update:departamento="val => form.ubicacion.departamento = val?.id || ''"
+          @update:municipio="val => form.ubicacion.municipio = val?.id ?? val ?? ''"
+          @update:localidad="val => form.ubicacion.localidad = val?.id ?? val ?? ''"
           @update:direccion="val => form.ubicacion.direccion = val"
           @update:coords="val => { form.ubicacion.lat = val.lat; form.ubicacion.lng = val.lng; }"
         />
