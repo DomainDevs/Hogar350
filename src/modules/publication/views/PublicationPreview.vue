@@ -292,13 +292,14 @@ const form = reactive({
     areapv:0,
     estrato:'',
     aceptaMascotas:null },
-  ubicacion: { departamento:'', ciudad:'', direccion:'' },
+  ubicacion: { departamento:'', municipio:'', localidad:'', direccion:'' },
   imagenes: []
 });
 
 const ubicacionItems = [
   { label: 'Departamento', value: () => form.ubicacion.departamento, icon: MapPin },
-  { label: 'Ciudad', value: () => form.ubicacion.ciudad, icon: MapPin },
+  { label: 'Municipio', value: () => form.ubicacion.municipio, icon: MapPin },
+  { label: 'Localidad', value: () => form.ubicacion.localidad, icon: MapPin },
   { label: 'Dirección', value: () => form.ubicacion.direccion, icon: Home, full: true }
 ]
 

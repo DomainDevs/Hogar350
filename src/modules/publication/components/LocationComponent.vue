@@ -1,12 +1,67 @@
+<script setup>
+import { ref } from 'vue'
+import LocationSelector from './LocationSelector.vue'
+import MapSelector from './MapSelector.vue'
+
+const emit = defineEmits([
+  'update:departamento',
+  'update:municipio',
+  'update:localidad',
+  'update:direccion',
+  'update:coords'
+])
+
+const mapRef = ref(null)
+const mapLat = ref(null)
+const mapLng = ref(null)
+const mapCodigo = ref(null)
+
+// ------------------------
+// SELECTOR
+// ------------------------
+
+function onDepartamentoUpdate(dep) {
+  emit('update:departamento', dep)
+}
+
+function onMunicipioUpdate(municipio) {
+  if (!municipio) return
+
+  mapLat.value = Number(municipio.lat)
+  mapLng.value = Number(municipio.lng)
+  mapCodigo.value = municipio.codigo
+
+  // 🔥 ESTO ES LO QUE NO PUEDES PERDER
+  mapRef.value?.placeMarker(mapLat.value, mapLng.value)
+
+  emit('update:municipio', municipio)
+  emit('update:coords', {
+    lat: mapLat.value,
+    lng: mapLng.value,
+    codigo: mapCodigo.value
+  })
+}
+
+// ------------------------
+// MAPA
+// ------------------------
+
+function onMapCoordsUpdate(coords) {
+  mapLat.value = coords.lat
+  mapLng.value = coords.lng
+  mapCodigo.value = coords.codigo
+
+  emit('update:coords', coords)
+}
+</script>
+
 <template>
   <div class="space-y-4">
-    <!-- Selectores de ubicación -->
     <LocationSelector
       @update:departamento="onDepartamentoUpdate"
       @update:municipio="onMunicipioUpdate"
     />
 
-    <!-- Mapa -->
     <MapSelector
       ref="mapRef"
       :lat="mapLat"
@@ -16,53 +71,3 @@
     />
   </div>
 </template>
-
-<script setup>
-import { ref } from 'vue'
-import LocationSelector from '@/modules/publication/components/LocationSelector.vue'
-import MapSelector from '@/modules/publication/components/MapSelector.vue'
-
-const mapRef = ref(null)
-
-// Coordenadas y código que se pasan al mapa
-const mapLat = ref(null)
-const mapLng = ref(null)
-const mapCodigo = ref(null)
-
-// ------------------------
-// Handlers de selección
-// ------------------------
-
-// Selección de departamento
-function onDepartamentoUpdate(dep) {
-  // Mantener lógica original, opcional manejar algo adicional
-  // console.log('Departamento seleccionado', dep)
-}
-
-// Selección de municipio o localidad (compatibilidad: siempre emite update:municipio)
-function onMunicipioUpdate(municipio) {
-  if (!municipio) return
-
-  mapLat.value = Number(municipio.lat)
-  mapLng.value = Number(municipio.lng)
-  mapCodigo.value = municipio.codigo
-
-  // Centrar marcador en el mapa
-  mapRef.value?.placeMarker(mapLat.value, mapLng.value)
-}
-
-// Movimiento manual del marcador
-function onMapCoordsUpdate(coords) {
-  mapLat.value = coords.lat
-  mapLng.value = coords.lng
-  mapCodigo.value = coords.codigo
-  // Aquí podrías emitir al padre si quieres
-  // emit('update:coords', coords)
-}
-</script>
-
-<style scoped>
-.space-y-4 > * + * {
-  margin-top: 1rem;
-}
-</style>

@@ -480,6 +480,7 @@ const validateField = (field) => {
     case 'tiempoConstruccion': errors.tiempoConstruccion = c.tiempoConstruccion ? '' : 'Requerido'; break;
     case 'departamento': errors.departamento = u.departamento ? '' : 'Requerido'; break;
     case 'municipio': errors.municipio = u.municipio ? '' : 'Requerido'; break;
+    case 'localidad': errors.localidad = u.localidad ? '' : 'Requerido'; break;
     case 'direccion': errors.direccion = validateDireccion(u.direccion); break;
     case 'venta':
       if (g.tipoOferta === 'Vender'){
@@ -538,7 +539,7 @@ const unlockSection = (n) => {
   const sectionMapFields = {
     2: ['tipoInmueble', 'titulo', 'nombreContacto', 'apellidoContacto', 'numeroIdentificacion', 'telefonoContacto', 'emailContacto', 'descripcion'],
     3: ['area', 'areapv', 'estrato', 'piso', 'tiempoConstruccion'],
-    4: ['departamento', 'municipio', 'direccion'],
+    4: ['departamento', 'municipio', 'localidad', 'direccion'],
     5: ['venta', 'arriendo', 'administracion', 'compartir']
   };
   const fields = sectionMapFields[n];
