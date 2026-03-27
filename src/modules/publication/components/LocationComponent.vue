@@ -12,9 +12,13 @@ const emit = defineEmits([
 ])
 
 const mapRef = ref(null)
-const mapLat = ref(null)
-const mapLng = ref(null)
-const mapCodigo = ref(null)
+
+// 🔥 UNA sola fuente de verdad
+const coords = ref({
+  lat: null,
+  lng: null,
+  codigo: null
+})
 
 // ------------------------
 // SELECTOR
@@ -22,36 +26,35 @@ const mapCodigo = ref(null)
 
 function onDepartamentoUpdate(dep) {
   emit('update:departamento', dep)
+
+  // 🔥 limpiar estado dependiente
+  coords.value = { lat: null, lng: null, codigo: null }
 }
 
 function onMunicipioUpdate(municipio) {
   if (!municipio) return
 
-  mapLat.value = Number(municipio.lat)
-  mapLng.value = Number(municipio.lng)
-  mapCodigo.value = municipio.codigo
+  coords.value = {
+    lat: Number(municipio.lat),
+    lng: Number(municipio.lng),
+    codigo: municipio.codigo
+  }
 
-  // 🔥 ESTO ES LO QUE NO PUEDES PERDER
-  mapRef.value?.placeMarker(mapLat.value, mapLng.value)
+  // 🔥 mantener mapa funcionando
+  mapRef.value?.placeMarker(coords.value.lat, coords.value.lng)
 
   emit('update:municipio', municipio)
-  emit('update:coords', {
-    lat: mapLat.value,
-    lng: mapLng.value,
-    codigo: mapCodigo.value
-  })
+  emit('update:coords', coords.value)
 }
 
 // ------------------------
 // MAPA
 // ------------------------
 
-function onMapCoordsUpdate(coords) {
-  mapLat.value = coords.lat
-  mapLng.value = coords.lng
-  mapCodigo.value = coords.codigo
+function onMapCoordsUpdate(newCoords) {
+  coords.value = newCoords
 
-  emit('update:coords', coords)
+  emit('update:coords', coords.value)
 }
 </script>
 
@@ -64,9 +67,9 @@ function onMapCoordsUpdate(coords) {
 
     <MapSelector
       ref="mapRef"
-      :lat="mapLat"
-      :lng="mapLng"
-      :codigo="mapCodigo"
+      :lat="coords.lat"
+      :lng="coords.lng"
+      :codigo="coords.codigo"
       @update:coords="onMapCoordsUpdate"
     />
   </div>
