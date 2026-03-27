@@ -47,6 +47,25 @@ function onMunicipioUpdate(municipio) {
   emit('update:coords', coords.value)
 }
 
+function onLocalidadUpdate(localidad) {
+  if (!localidad) return
+
+  coords.value = {
+    lat: Number(localidad.lat),
+    lng: Number(localidad.lng),
+    codigo: localidad.codigo ?? coords.value.codigo
+  }
+
+  // 🔥 mover marcador en el mapa
+  mapRef.value?.placeMarker(coords.value.lat, coords.value.lng)
+
+  emit('update:localidad', localidad)
+  emit('update:coords', coords.value)
+
+  // 🔥 guardar en localStorage
+  localStorage.setItem('localidad', JSON.stringify(localidad))
+}
+
 // ------------------------
 // MAPA
 // ------------------------
@@ -63,6 +82,7 @@ function onMapCoordsUpdate(newCoords) {
     <LocationSelector
       @update:departamento="onDepartamentoUpdate"
       @update:municipio="onMunicipioUpdate"
+      @update:localidad="onLocalidadUpdate"
     />
 
     <MapSelector
