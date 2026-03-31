@@ -1,5 +1,6 @@
 <template>
   <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+    
     <!-- Departamento -->
     <select v-model="selectedDepartamento" @change="onDepartamentoChange"
       class="border px-2 py-1 rounded w-full">
@@ -13,6 +14,7 @@
       </option>
     </select>
 
+    
     <!-- Municipio -->
     <select v-model="selectedCiudad" @change="onCiudadChange"
       class="border px-2 py-1 rounded w-full"
@@ -27,6 +29,7 @@
         {{ c.nombre }}
       </option>
     </select>
+
   </div>
 </template>
 
@@ -44,7 +47,7 @@ const ciudades = ref([])
 const selectedDepartamento = ref('')
 const selectedCiudad = ref('')
 
-// Cargar JSON
+// Cargar JSON al montar
 onMounted(async () => {
   try {
     const depRes = await fetch('/data/departamentos.json')
@@ -57,32 +60,29 @@ onMounted(async () => {
   }
 })
 
-// Filtrar municipios por departamento
+// Computed para filtrar municipios por departamento
 const ciudadesFiltradas = computed(() => {
-  return ciudades.value.filter(
-    c => String(c.departamentoId) === String(selectedDepartamento.value)
-  )
+  return ciudades.value.filter(c => String(c.departamentoId) === String(selectedDepartamento.value))
 })
 
-// Manejar cambio de departamento
+// Cambio de departamento
 function onDepartamentoChange() {
-  selectedCiudad.value = ''
+  selectedCiudad.value = '' // resetear ciudad
   const dep = departamentos.value.find(d => d.id === selectedDepartamento.value)
   emit('update:departamento', dep || null)
 }
 
-// Manejar cambio de ciudad
+// Cambio de ciudad
 function onCiudadChange() {
   const ciudad = ciudades.value.find(c => c.id === selectedCiudad.value)
   if (!ciudad) return
 
-  // Emitir ciudad con coordenadas
-  const ciudadConCoords = {
+  // Emitir ciudad con coordenadas numéricas seguras
+  emit('update:ciudad', {
     ...ciudad,
-    lat: ciudad.lat ?? null,
-    lng: ciudad.lng ?? null
-  }
-  emit('update:ciudad', ciudadConCoords)
+    lat: Number(ciudad.lat) || 0,
+    lng: Number(ciudad.lng) || 0
+  })
 }
 </script>
 

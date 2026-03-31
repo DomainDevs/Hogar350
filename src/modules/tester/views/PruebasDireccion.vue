@@ -1,70 +1,63 @@
 <template>
-  <div class="py-20">
-    <!-- Ejemplo: combos de selección -->
-    <select v-model="selectedDepartamento">
-      <option value="Cundinamarca">Cundinamarca</option>
-      <option value="Antioquia">Antioquia</option>
-      <option value="Valle del Cauca">Valle del Cauca</option>
-    </select>
-
-    <select v-model="selectedCiudad">
-      <option value="Bogotá">Bogotá</option>
-      <option value="Medellín">Medellín</option>
-      <option value="Cali">Cali</option>
-    </select>
-
-    <select v-model="selectedLocalidad">
-      <option value="Chapinero">Chapinero</option>
-      <option value="Usaquén">Usaquén</option>
-      <option value="El Poblado">El Poblado</option>
-    </select>
-    <!-- Autocomplete -->
-    <AddressAutocompleteAdvanced
-      :pais="'Colombia'"
-      :ciudad="selectedCiudad"
-      :mapRef="mapSelector"
-      @update:coords="handleCoordsUpdate"
-      @update:address="address = $event"
+  <br/>
+  <div class="space-y-4">
+    <!-- Selectores -->
+    <LocationSelector
+      @update:departamento="onDepartamentoUpdate"
+      @update:ciudad="onCiudadUpdate"
     />
 
     <!-- Mapa -->
     <MapSelector
-      ref="mapSelector"
-      :lat="coords.lat"
-      :lng="coords.lng"
-      :codigo="coords.codigo"
-      :address="coords.address"
-      @update:coords="handleCoordsUpdate"
+      ref="mapRef"
+      :lat="mapLat"
+      :lng="mapLng"
+      :codigo="mapCodigo"
+      @update:coords="onMapCoordsUpdate"
     />
-    
-
-    <!-- Datos -->
-    <div>
-      <p>Latitud: {{ coords.lat }}</p>
-      <p>Longitud: {{ coords.lng }}</p>
-      <p>Código: {{ coords.codigo }}</p>
-      <p>Dirección coords: {{ coords.address }}</p>
-      <p>Dirección: {{ address }}</p>
-    </div>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
-import AddressAutocompleteAdvanced from '@/modules/tester/components/AddressAutocompleteAdvanced.vue'
+import LocationSelector from '@/modules/tester/components/LocationSelector.vue'
 import MapSelector from '@/modules/tester/components/MapSelector.vue'
 
-const selectedDepartamento = ref('Cundinamarca')
-const selectedCiudad = ref('Bogotá')
-const selectedLocalidad = ref('Chapinero')
+const mapRef = ref(null)
 
-// ← Incluye 'codigo' desde el inicio
-const coords = ref({ lat: null, lng: null, codigo: null })
-const address = ref('')
-const mapSelector = ref(null)
+// Coordenadas y código que se pasan al mapa
+const mapLat = ref(null)
+const mapLng = ref(null)
+const mapCodigo = ref(null)
 
-// Usar handler para mantener reactividad del ref
-function handleCoordsUpdate(payload) {
-  coords.value = { ...coords.value, ...payload }
+// Selección departamento
+function onDepartamentoUpdate(dep) {
+  // opcional: manejar lógica si se requiere
+  // console.log('Departamento seleccionado', dep)
+}
+
+// Selección municipio
+function onCiudadUpdate(ciudad) {
+  mapLat.value = ciudad.lat
+  mapLng.value = ciudad.lng
+  mapCodigo.value = ciudad.codigo
+
+  // Centrar marcador en el mapa
+  mapRef.value?.placeMarker(mapLat.value, mapLng.value)
+}
+
+// Cuando el marcador se mueve manualmente
+function onMapCoordsUpdate(coords) {
+  mapLat.value = coords.lat
+  mapLng.value = coords.lng
+  mapCodigo.value = coords.codigo
+  // Aquí podrías emitir al padre si quieres
+  // emit('update:coords', coords)
 }
 </script>
+
+<style scoped>
+.space-y-4 > * + * {
+  margin-top: 1rem;
+}
+</style>
