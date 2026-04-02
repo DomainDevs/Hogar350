@@ -109,7 +109,7 @@
           </div>
         </div>
 
-        <button type="button" @click="handleUnlock(2)" class="btn-primary">Continuar a Características</button>
+        <button type="button" @click="handleUnlock(2)" class="btn-primary">Siguiente: Características</button>
       </div>
     </section>
 
@@ -162,18 +162,12 @@
         </div>
       </div>
 
-      <button type="button" @click="handleUnlock(3)" class="btn-primary mt-8">Continuar a Ubicación</button>
+      <button type="button" @click="handleUnlock(3)" class="btn-primary mt-8">Siguiente: Ubicación</button>
     </section>
 
     <!-- SECCIÓN 3: Ubicación -->
     <section v-show="unlockedSections[3]" :ref="el => sectionRefs[3] = el" class="step-section">
       <h2 class="section-title"><span class="step-number">3</span> Ubicación</h2>
-      <div class="mb-6">
-        <label class="label-style">Dirección exacta <span class="text-brand">*</span></label>
-        <input v-model="form.ubicacion.direccion" @blur="validateField('direccion')" 
-          class="input-style" placeholder="Calle 123 # 45-67" :class="{ 'error-ring': errors.direccion }" />
-        <p v-if="errors.direccion" class="error-msg">{{ errors.direccion }}</p>
-      </div>
       
       <LocationComponent
         :departamento="form.ubicacion.departamento"
@@ -187,8 +181,15 @@
         @update:direccion="val => form.ubicacion.direccion = val"
         @update:coords="val => { form.ubicacion.lat = val.lat; form.ubicacion.lng = val.lng; }"
       />
+      <br/>
+      <div class="mb-6">
+        <label class="label-style">Dirección exacta <span class="text-brand">*</span></label>
+        <input v-model="form.ubicacion.direccion" @blur="validateField('direccion')" 
+          class="input-style" placeholder="Calle 123 # 45-67" :class="{ 'error-ring': errors.direccion }" />
+        <p v-if="errors.direccion" class="error-msg">{{ errors.direccion }}</p>
+      </div>
 
-      <button type="button" @click="handleUnlock(4)" class="btn-primary mt-8">Continuar Precios</button>
+      <button type="button" @click="handleUnlock(4)" class="btn-primary mt-8">Siguiente: Definir precios</button>
     </section>
 
     <!-- SECCIÓN 4: Precios -->
@@ -274,7 +275,7 @@ const form = reactive({
     habitaciones: 1, banos: 1, parqueaderos: 0, area: 0, areapv: 0, 
     estrato: '', piso: '', tiempoConstruccion: '', aceptaMascotas: false 
   },
-  ubicacion: { departamento: '', municipio: '', localidad: '', direccion: '', lat: null, lng: null },
+  ubicacion: { departamento: '', municipio: {}, localidad: '', direccion: '', lat: null, lng: null },
   precios: { venta: 0, arriendo: 0, administracion: 0, compartir: 0 },
   imagenes: []
 });

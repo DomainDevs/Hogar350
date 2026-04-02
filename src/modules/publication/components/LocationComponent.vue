@@ -1,96 +1,92 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import LocationSelector from './LocationSelector.vue'
 import MapSelector from './MapSelector.vue'
 
+// Props del formulario principal
+const props = defineProps({
+  municipio: Object,       // Municipio completo
+  coords: {
+    type: Object,
+    default: () => ({ lat: null, lng: null, codigo: null, municipio: '', departamento: '' })
+  }
+})
+
+// Emits hacia el formulario principal
 const emit = defineEmits([
-  'update:departamento',
   'update:municipio',
-  'update:localidad',
-  'update:direccion',
   'update:coords'
 ])
 
 const mapRef = ref(null)
 
-// 🔥 UNA sola fuente de verdad
-const coords = ref({
-  lat: null,
-  lng: null,
-  codigo: null
-})
+// Estado local sincronizado con props
+const localCoords = ref({ ...props.coords })
 
-// ------------------------
-// SELECTOR
-// ------------------------
+// Observar si el padre cambia coords (ej. sessionStorage)
+watch(
+  () => props.coords,
+  (newVal) => {
+    localCoords.value = { ...newVal }
+  },
+  { deep: true }
+)
 
-function onDepartamentoUpdate(dep) {
-  emit('update:departamento', dep)
-
-  // 🔥 limpiar estado dependiente
-  coords.value = { lat: null, lng: null, codigo: null }
-}
-
+// Cuando LocationSelector emite un municipio
 function onMunicipioUpdate(municipio) {
   if (!municipio) return
 
-  coords.value = {
+  // Actualizamos coords locales
+  localCoords.value = {
     lat: Number(municipio.lat),
     lng: Number(municipio.lng),
-    codigo: municipio.codigo
+    codigo: municipio.codigoDane,      // Código oficial
+    municipio: municipio.municipio,    // Nombre completo
+    departamento: municipio.departamento
   }
 
-  // 🔥 mantener mapa funcionando
-  mapRef.value?.placeMarker(coords.value.lat, coords.value.lng)
+  // Movemos el marcador en el mapa
+  mapRef.value?.placeMarker(localCoords.value.lat, localCoords.value.lng)
 
+  // Emitimos al padre
   emit('update:municipio', municipio)
-  emit('update:coords', coords.value)
+  emit('update:coords', localCoords.value)
+
+  // Guardar en localStorage si quieres persistir la selección
+  localStorage.setItem('selectedLocation', JSON.stringify(localCoords.value))
 }
 
-function onLocalidadUpdate(localidad) {
-  if (!localidad) return
+// Cuando el mapa emite nuevas coords (usuario mueve el pin)
+function onMapUpdate(newCoords) {
+  localCoords.value = newCoords
+  emit('update:coords', newCoords)
 
-  coords.value = {
-    lat: Number(localidad.lat),
-    lng: Number(localidad.lng),
-    codigo: localidad.codigo ?? coords.value.codigo
-  }
-
-  // 🔥 mover marcador en el mapa
-  mapRef.value?.placeMarker(coords.value.lat, coords.value.lng)
-
-  emit('update:localidad', localidad)
-  emit('update:coords', coords.value)
-
-  // 🔥 guardar en localStorage
-  localStorage.setItem('localidad', JSON.stringify(localidad))
-}
-
-// ------------------------
-// MAPA
-// ------------------------
-
-function onMapCoordsUpdate(newCoords) {
-  coords.value = newCoords
-
-  emit('update:coords', coords.value)
+  // Actualizar localStorage también
+  localStorage.setItem('selectedLocation', JSON.stringify(localCoords.value))
 }
 </script>
 
 <template>
   <div class="space-y-4">
+    <!-- Selector de municipio -->
     <LocationSelector
-      @update:departamento="onDepartamentoUpdate"
+      :municipio="municipio"
       @update:municipio="onMunicipioUpdate"
-      @update:localidad="onLocalidadUpdate"
     />
 
+    <!-- Mapa -->
     <MapSelector
       ref="mapRef"
-      :lat="coords.lat"
-      :lng="coords.lng"
-      :codigo="coords.codigo"
-      @update:coords="onMapCoordsUpdate"
+      :lat="localCoords.lat"
+      :lng="localCoords.lng"
+      :codigo="localCoords.codigo"
+      @update:coords="onMapUpdate"
     />
   </div>
 </template>
+
+<style scoped>
+.space-y-4 > * + * {
+  margin-top: 1rem;
+}
+</style>

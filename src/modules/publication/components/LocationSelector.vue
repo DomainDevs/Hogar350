@@ -1,162 +1,169 @@
 <template>
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 py-3">
+  <div class="relative w-full" style="z-index: 9999;">
+    
+    <!-- MUNICIPIO -->
+    <label class="label-style">
+      Ciudad / Municipio <span class="text-[#ff5500]">*</span>
+    </label>
 
-    <!-- Departamento -->
-    <div class="flex flex-col">
-      <label class="label-style">
-        Departamento <span class="text-[#ff5500]">*</span>
-      </label>
-      <select
-        v-model="selectedDepartamento"
-        @change="onDepartamentoChange"
-        class="input-style"
-        :class="[errors.departamento ? 'border-red-400 bg-red-50' : '']"
+    <!-- Combo estilo select -->
+    <div class="relative">
+      <input
+        type="text"
+        v-model="search"
+        @focus="onFocus"
+        @blur="onBlur"
+        @input="filterMunicipios"
+        class="input-style pr-10 cursor-pointer"
+        placeholder="Registra o escribe tu ciudad/municipio"
+        autocomplete="off"
+      />
+
+      <!-- Icono de flecha -->
+      <span
+        class="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+        @mousedown.prevent="clearAndOpen"
       >
-        <option disabled value="">Seleccione departamento</option>
-        <option v-for="d in departamentos" :key="d.id" :value="d.id">
-          {{ d.nombre }}
-        </option>
-      </select>
-      <p v-if="errors.departamento" class="error-msg">{{ errors.departamento }}</p>
+        ▼
+      </span>
+
+      <!-- Dropdown -->
+      <ul
+        v-show="showDropdown && filtered.length"
+        class="absolute top-full left-0 w-full bg-white border border-gray-300 rounded-lg mt-1 max-h-60 overflow-y-auto shadow-lg"
+        style="z-index: 10000;"
+      >
+        <li
+          v-for="item in filtered"
+          :key="item.municipioId"
+          @mousedown.prevent="selectMunicipio(item)"
+          class="px-4 py-2 hover:bg-orange-50 cursor-pointer"
+        >
+          {{ item.municipio }} ({{ item.departamento }})
+        </li>
+      </ul>
     </div>
 
-    <!-- Municipio -->
-    <div class="flex flex-col">
+    <!-- DIRECCIÓN EXACTA -->
+    <div class="mt-4">
       <label class="label-style">
-        Municipio <span class="text-[#ff5500]">*</span>
+        Dirección exacta <span class="text-[#ff5500]">*</span>
       </label>
-      <select
-        v-model="selectedMunicipio"
-        @change="onMunicipioChange"
+      <input
+        type="text"
+        v-model="direccion"
+        @input="emitDireccion"
         class="input-style"
-        :disabled="!selectedDepartamento"
-        :class="[errors.municipio ? 'border-red-400 bg-red-50' : '']"
-      >
-        <option disabled value="">Seleccione municipio</option>
-        <option v-for="m in municipiosFiltrados" :key="m.id" :value="m.id">
-          {{ m.nombre }}
-        </option>
-      </select>
-      <p v-if="errors.municipio" class="error-msg">{{ errors.municipio }}</p>
-    </div>
-
-    <!-- Localidad -->
-    <div class="flex flex-col">
-      <label class="label-style">
-        Localidad <span class="text-[#ff5500]">*</span>
-      </label>
-      <select
-        v-model="selectedLocalidad"
-        @change="onLocalidadChange"
-        class="input-style"
-        :disabled="!selectedMunicipio"
-        :class="[errors.localidad ? 'border-red-400 bg-red-50' : '']"
-      >
-        <option disabled value="">Seleccione localidad</option>
-        <option v-for="l in localidadesFiltradas" :key="l.id" :value="l.id">
-          {{ l.nombre }}
-        </option>
-      </select>
-      <p v-if="errors.localidad" class="error-msg">{{ errors.localidad }}</p>
+        placeholder="Ej: Calle 123 # 45-67"
+      />
     </div>
 
   </div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 
+// 🔥 Extendemos emits (sin romper los actuales)
 const emit = defineEmits([
-  'update:departamento',
   'update:municipio',
-  'update:localidad',
-  'update:map'
+  'update:departamento',
+  'update:coords',
+  'update:direccion'
 ])
 
-const departamentos = ref([])
+const MAX_RESULTS = 20
+const search = ref('')
+const direccion = ref('')
+const showDropdown = ref(false)
 const municipios = ref([])
-const localidades = ref([])
+const filtered = ref([])
 
-const selectedDepartamento = ref('')
-const selectedMunicipio = ref('')
-const selectedLocalidad = ref('')
-
-// Manejo de errores simple
-const errors = ref({
-  departamento: '',
-  municipio: '',
-  localidad: ''
-})
-
-// Datos por defecto de Bogotá
-const defaultBogota = { id: '00001', nombre: 'Bogotá D.C.', lat: 4.610, lng: -74.070 }
-
+// Cargar datos desde location.json
 onMounted(async () => {
   try {
-    departamentos.value = await (await fetch('/data/departamentos.json')).json()
-    municipios.value = await (await fetch('/data/municipios.json')).json()
-    localidades.value = await (await fetch('/data/localidades.json')).json()
+    municipios.value = await (await fetch('/data/location.json')).json()
+    filtered.value = municipios.value.slice(0, MAX_RESULTS)
   } catch (err) {
-    console.error('Error cargando datos', err)
+    console.error('Error cargando location.json', err)
   }
 })
 
-const municipiosFiltrados = computed(() => {
-  if (!selectedDepartamento.value) return []
-  return municipios.value.filter(m => String(m.departamentoId) === String(selectedDepartamento.value))
-})
+// Filtra municipios mientras el usuario digita
+function filterMunicipios() {
+  const q = search.value.toLowerCase().trim()
 
-const localidadesFiltradas = computed(() => {
-  if (!selectedMunicipio.value) return []
-  return localidades.value.filter(l =>
-    String(l.departamentoId) === String(selectedDepartamento.value) &&
-    String(l.municipioId) === String(selectedMunicipio.value)
-  )
-})
-
-function onDepartamentoChange() {
-  selectedMunicipio.value = ''
-  selectedLocalidad.value = ''
-  const dep = departamentos.value.find(d => d.id === selectedDepartamento.value) || null
-  emit('update:departamento', dep)
-  emit('update:municipio', defaultBogota)
-  emit('update:localidad', defaultBogota)
-  emit('update:map', { lat: defaultBogota.lat, lng: defaultBogota.lng })
-}
-
-function onMunicipioChange() {
-  selectedLocalidad.value = ''
-  const municipio = municipios.value.find(m => m.id === selectedMunicipio.value)
-  if (!municipio) return
-  const coordenadas = { lat: Number(municipio.lat), lng: Number(municipio.lng) }
-  emit('update:municipio', { ...municipio, ...coordenadas })
-  emit('update:localidad', defaultBogota)
-  emit('update:map', coordenadas)
-}
-
-function onLocalidadChange() {
-  const loc = localidades.value.find(l => l.id === selectedLocalidad.value)
-  if (!loc) return
-  const coordenadas = { lat: Number(loc.lat), lng: Number(loc.lng) }
-
-  // Emitir la localidad
-  emit('update:localidad', loc)
-
-  // 🔥 también emitir municipio para que el mapa se actualice
-  const municipio = municipios.value.find(m => m.id === selectedMunicipio.value)
-  if (municipio) {
-    emit('update:municipio', { ...municipio, ...coordenadas })
+  if (!q) {
+    filtered.value = municipios.value.slice(0, MAX_RESULTS)
+    showDropdown.value = true
+    return
   }
 
-  // Map siempre recibe las coordenadas de la localidad
-  emit('update:map', coordenadas)
+  filtered.value = municipios.value
+    .filter(m =>
+      m.municipio.toLowerCase().includes(q) ||
+      m.departamento.toLowerCase().includes(q)
+    )
+    .slice(0, MAX_RESULTS)
+
+  showDropdown.value = true
+}
+
+// Selección de municipio
+function selectMunicipio(item) {
+  search.value = `${item.municipio} (${item.departamento})`
+  showDropdown.value = false
+
+  emit('update:municipio', item)
+  emit('update:departamento', item) // 🔥 ahora consistente (objeto completo)
+  emit('update:coords', { lat: Number(item.lat), lng: Number(item.lng) })
+}
+
+// Emit dirección
+function emitDireccion() {
+  emit('update:direccion', direccion.value)
+}
+
+// Abrir dropdown al hacer focus
+function onFocus() {
+  showDropdown.value = true
+  filterMunicipios()
+}
+
+// Cerrar dropdown con retraso para permitir click
+function onBlur() {
+  setTimeout(() => {
+    showDropdown.value = false
+  }, 150)
+}
+
+// Abrir limpio con límite aplicado
+function clearAndOpen() {
+  search.value = ''
+  filtered.value = municipios.value.slice(0, MAX_RESULTS)
+  showDropdown.value = true
 }
 </script>
 
 <style scoped>
-.step-section { @apply bg-white border border-gray-100 p-6 sm:p-8 rounded-lg shadow-sm transition-all duration-300; }
-.label1-style { @apply block text-[16px] font-black tracking-[0.15em] mb-2; }
-.label-style { @apply block text-[14px] font-black text-gray-700 tracking-[0.15em] mb-2; }
-.input-style { @apply w-full px-6 py-3 rounded-lg border border-gray-200 outline-none transition-all text-sm placeholder:text-gray-300 focus:border-[#ff5500] focus:ring-2 focus:ring-orange-100; }
-.error-msg { @apply text-[#ff5500] text-[12px] font-bold mt-1.5 tracking-tight; }
+.label-style {
+  display: block;
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 4px;
+  color: #374151;
+}
+.input-style {
+  width: 100%;
+  padding: 10px 36px 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  outline: none;
+  transition: all 0.2s;
+  background-color: #fff;
+}
+.input-style:focus {
+  border-color: #ff5500;
+  box-shadow: 0 0 0 2px rgba(255, 85, 0, 0.2);
+}
 </style>
