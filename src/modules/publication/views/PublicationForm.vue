@@ -170,25 +170,14 @@
       <h2 class="section-title"><span class="step-number">3</span> Ubicación</h2>
       
       <LocationComponent
-        :departamento="form.ubicacion.departamento"
         :municipio="form.ubicacion.municipio"
-        :localidad="form.ubicacion.localidad"
         :direccion="form.ubicacion.direccion"
         :coords="{ lat: form.ubicacion.lat, lng: form.ubicacion.lng }"
-        @update:departamento="val => form.ubicacion.departamento = val?.id || ''"
         @update:municipio="val => form.ubicacion.municipio = val?.id ?? val ?? ''"
-        @update:localidad="val => form.ubicacion.localidad = val?.id ?? val ?? ''"
         @update:direccion="val => form.ubicacion.direccion = val"
         @update:coords="val => { form.ubicacion.lat = val.lat; form.ubicacion.lng = val.lng; }"
       />
-      <br/>
-      <div class="mb-6">
-        <label class="label-style">Dirección exacta <span class="text-brand">*</span></label>
-        <input v-model="form.ubicacion.direccion" @blur="validateField('direccion')" 
-          class="input-style" placeholder="Calle 123 # 45-67" :class="{ 'error-ring': errors.direccion }" />
-        <p v-if="errors.direccion" class="error-msg">{{ errors.direccion }}</p>
-      </div>
-
+      
       <button type="button" @click="handleUnlock(4)" class="btn-primary mt-8">Siguiente: Definir precios</button>
     </section>
 
@@ -333,7 +322,7 @@ const validateField = (field) => {
       else errors.areapv = '';
     },
     estrato: () => errors.estrato = c.estrato ? '' : 'Requerido',
-    piso: () => errors.piso = (c.piso === '' || c.piso < 0) ? 'Requerido/Inválido' : '',
+    piso: () => errors.piso = (c.piso === '' || c.piso < 0 || c.piso > 100) ? 'Requerido/Inválido' : '',
     tiempoConstruccion: () => errors.tiempoConstruccion = c.tiempoConstruccion ? '' : 'Requerido',
     direccion: () => errors.direccion = validators.validateDireccion(u.direccion),
     venta: () => errors.venta = (g.tipoOferta === 'Vender' && cleanPrice(v.venta) < 10000000) ? 'Mínimo $10.000.000' : '',

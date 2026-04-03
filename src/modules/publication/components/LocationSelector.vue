@@ -52,7 +52,7 @@
       <input
         type="text"
         v-model="direccion"
-        @input="emitDireccion"
+        @input="onDireccionInput"
         class="input-style"
         placeholder="Ej: Calle 123 # 45-67"
       />
@@ -64,7 +64,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 
-// 🔥 Extendemos emits (sin romper los actuales)
 const emit = defineEmits([
   'update:municipio',
   'update:departamento',
@@ -78,6 +77,8 @@ const direccion = ref('')
 const showDropdown = ref(false)
 const municipios = ref([])
 const filtered = ref([])
+
+let geocodeTimeout = null
 
 // Cargar datos desde location.json
 onMounted(async () => {
@@ -115,13 +116,33 @@ function selectMunicipio(item) {
   showDropdown.value = false
 
   emit('update:municipio', item)
-  emit('update:departamento', item) // 🔥 ahora consistente (objeto completo)
+  emit('update:departamento', item) 
   emit('update:coords', { lat: Number(item.lat), lng: Number(item.lng) })
 }
 
-// Emit dirección
-function emitDireccion() {
+// Entrada de dirección exacta
+function onDireccionInput() {
   emit('update:direccion', direccion.value)
+
+  if (geocodeTimeout) clearTimeout(geocodeTimeout)
+
+  // Debounce de 700ms antes de llamar la API
+  geocodeTimeout = setTimeout(async () => {
+    if (!direccion.value.trim() || !search.value.trim()) return
+
+    const query = encodeURIComponent(`${search.value} ${direccion.value}`)
+    try {
+      const res = await fetch(
+        `https://us1.locationiq.com/v1/search?key=pk.21cc39d91ae48ec7d7a064d2e7241480&q=221b%2C%20Baker%20St%2C%20London&format=json&limit=1`
+      )
+      const data = await res.json()
+      if (data?.length) {
+        emit('update:coords', { lat: Number(data[0].lat), lng: Number(data[0].lon) })
+      }
+    } catch (err) {
+      console.error('Error geocodificando dirección:', err)
+    }
+  }, 700)
 }
 
 // Abrir dropdown al hacer focus
