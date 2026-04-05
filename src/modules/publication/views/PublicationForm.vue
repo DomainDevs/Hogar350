@@ -180,6 +180,10 @@
         form.ubicacion.lng = val.lng; 
       }"
     />
+
+    <p v-if="errors.direccion" class="error-msg">{{ errors.direccion }}</p>
+    <p v-if="errors.municipio" class="error-msg">{{ errors.municipio }}</p>
+    
       
       <button type="button" @click="handleUnlock(4)" class="btn-primary mt-8">Siguiente: Definir precios</button>
     </section>

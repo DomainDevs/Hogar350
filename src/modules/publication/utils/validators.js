@@ -190,9 +190,6 @@ export const validateDireccion = (direccion) => {
   if (len > 150)
     return 'La dirección es demasiado larga';
 
-  if (isMostlyUppercase(value))
-    return 'La dirección no debe estar escrita solo en mayúsculas';
-
   if (hasRepeatedCharacters(value))
     return 'La dirección contiene caracteres repetitivos inválidos';
 
