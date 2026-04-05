@@ -169,14 +169,17 @@
     <section v-show="unlockedSections[3]" :ref="el => sectionRefs[3] = el" class="step-section">
       <h2 class="section-title"><span class="step-number">3</span> Ubicación</h2>
       
-      <LocationComponent
-        :municipio="form.ubicacion.municipio"
-        :direccion="form.ubicacion.direccion"
-        :coords="{ lat: form.ubicacion.lat, lng: form.ubicacion.lng }"
-        @update:municipio="val => form.ubicacion.municipio = val?.id ?? val ?? ''"
-        @update:direccion="val => form.ubicacion.direccion = val"
-        @update:coords="val => { form.ubicacion.lat = val.lat; form.ubicacion.lng = val.lng; }"
-      />
+    <LocationComponent
+      :municipio="form.ubicacion.municipio"
+      :direccion="form.ubicacion.direccion"
+      :coords="{ lat: form.ubicacion.lat, lng: form.ubicacion.lng }"
+      @update:municipio="val => form.ubicacion.municipio = val"
+      @update:direccion="val => form.ubicacion.direccion = val"
+      @update:coords="val => { 
+        form.ubicacion.lat = val.lat; 
+        form.ubicacion.lng = val.lng; 
+      }"
+    />
       
       <button type="button" @click="handleUnlock(4)" class="btn-primary mt-8">Siguiente: Definir precios</button>
     </section>
@@ -264,7 +267,7 @@ const form = reactive({
     habitaciones: 1, banos: 1, parqueaderos: 0, area: 0, areapv: 0, 
     estrato: '', piso: '', tiempoConstruccion: '', aceptaMascotas: false 
   },
-  ubicacion: { departamento: '', municipio: {}, localidad: '', direccion: '', lat: null, lng: null },
+  ubicacion: { municipio: {}, direccion: '', lat: null, lng: null, codigo: null, display_name: null }, //, display_name: null, place_id: 0
   precios: { venta: 0, arriendo: 0, administracion: 0, compartir: 0 },
   imagenes: []
 });
@@ -372,6 +375,8 @@ onMounted(async () => {
 
 const resetForm = () => { if (confirm('¿Limpiar todo el formulario?')) { sessionStorage.removeItem('publicationForm'); location.reload(); }};
 const goPreview = () => router.push({ name: 'PublicationPreview' });
+
+console.log('Ubicacion JSON:', JSON.stringify(form.ubicacion));
 </script>
 
 <style scoped>

@@ -141,7 +141,7 @@ const form = reactive({
   general: { tipoOferta:'', tipoInmueble:'', titulo:'', nombreContacto:'', apellidoContacto:'', telefonoContacto:'', emailContacto:'', descripcion:'', tipoIdentificacion:'', razonSocial:'', videoUrl:'' },
   precios: { venta:0, arriendo:0, compartir:0, administracion:'' },
   caracteristicas: { habitaciones:0, banos:0, parqueaderos:0, area:0, areapv:0, estrato:'', piso:'', tiempoConstruccion:'', aceptaMascotas:null },
-  ubicacion: { departamento:'', municipio:'', localidad:'', direccion:'', lat:null, lng:null },
+  ubicacion: { municipio:{}, direccion:'', lat:null, lng:null },
   imagenes: []
 });
 
@@ -177,16 +177,17 @@ const listaCaracteristicas = computed(() => [
 ]);
 
 const ubicacionVisible = computed(() => [
-  { label: 'Departamento', value: () => typeof form.ubicacion.departamento === 'object' ? form.ubicacion.departamento?.nombre : form.ubicacion.departamento, icon: MapPin },
-  { label: 'Municipio', value: () => typeof form.ubicacion.municipio === 'object' ? form.ubicacion.municipio?.nombre : form.ubicacion.municipio, icon: MapPin },
-  { label: 'Localidad', value: () => typeof form.ubicacion.localidad === 'object' ? form.ubicacion.localidad?.nombre : form.ubicacion.localidad, icon: MapPin },
+  { label: 'Departamento', value: () => typeof form.ubicacion.municipio.departamento === '' ? form.ubicacion.municipio.departamento?.nombre : form.ubicacion.municipio.departamento, icon: MapPin },
+  { label: 'Municipio', value: () => typeof form.ubicacion.municipio.municipio === 'object' ? form.ubicacion.municipio.municipio?.nombre : form.ubicacion.municipio.municipio, icon: MapPin },
+  { label: 'Localidad', value: () => typeof form.ubicacion.municipio.municipio === 'object' ? form.ubicacion.municipio.municipio?.nombre : form.ubicacion.municipio.municipio, icon: MapPin },
   { label: 'Dirección', value: () => form.ubicacion.direccion || '-', icon: Home } //, full: true
 ]);
 
 const googleMapsUrl = computed(() => `https://www.google.com/maps/search/?api=1&query=${form.ubicacion.lat},${form.ubicacion.lng}`);
 
-// --- CICLO DE VIDA Y MÉTODOS ---
 
+
+// --- CICLO DE VIDA Y MÉTODOS ---
 onMounted(() => {
   const saved = sessionStorage.getItem('publicationForm');
   if(saved) {
@@ -197,6 +198,8 @@ onMounted(() => {
         'https://multimedia.metrocuadrado.com/13439-M6448066/13439-M6448066_1_x.jpg?w=1080&q=80',
         'https://multimedia.metrocuadrado.com/13439-M6448066/13439-M6448066_2_x.jpg?w=1080&q=80'
       ];
+
+      console.log('Ubicacion JSON:', JSON.stringify(form.ubicacion));
     }
   }
   loaded.value = true;
@@ -206,9 +209,13 @@ const goBack = () => router.back();
 
 const publish = async () => {
   blocked.value = true;
+
+  // 👀 Mostrar form completo en consola
+  console.log('Formulario a publicar:', JSON.parse(JSON.stringify(form)));
+
   try {
     const payload = { ...form, imagenes: form.imagenes.map(img => img.url || img) };
-    const res = await fetch('https://localhost:5001/api/publications', {
+    const res = await fetch('https://localhost:7109/api/publications', {
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body: JSON.stringify(payload)
@@ -222,6 +229,7 @@ const publish = async () => {
     blocked.value = false;
   }
 };
+
 </script>
 
 <style scoped>
