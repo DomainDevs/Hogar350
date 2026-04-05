@@ -179,7 +179,6 @@ const listaCaracteristicas = computed(() => [
 const ubicacionVisible = computed(() => [
   { label: 'Departamento', value: () => typeof form.ubicacion.municipio.departamento === '' ? form.ubicacion.municipio.departamento?.nombre : form.ubicacion.municipio.departamento, icon: MapPin },
   { label: 'Municipio', value: () => typeof form.ubicacion.municipio.municipio === 'object' ? form.ubicacion.municipio.municipio?.nombre : form.ubicacion.municipio.municipio, icon: MapPin },
-  { label: 'Localidad', value: () => typeof form.ubicacion.municipio.municipio === 'object' ? form.ubicacion.municipio.municipio?.nombre : form.ubicacion.municipio.municipio, icon: MapPin },
   { label: 'Dirección', value: () => form.ubicacion.direccion || '-', icon: Home } //, full: true
 ]);
 
