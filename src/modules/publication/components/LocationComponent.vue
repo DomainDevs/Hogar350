@@ -36,7 +36,13 @@
           class="input-style input-with-button"
           placeholder="Ej: Calle 123 # 45-67"
         />
-        <button class="search-button" @click="buscarDireccion" title="Buscar dirección">
+        <button 
+        class="search-button" 
+        @click="buscarDireccion" 
+        title="Buscar dirección"  
+        :disabled="!canSearch"
+        :class="{ 'disabled-btn': !canSearch }"
+        >
           <svg xmlns="http://www.w3.org/2000/svg" class="search-icon" viewBox="0 0 24 24" fill="white" width="16" height="16">
             <path d="M10 2a8 8 0 105.293 14.293l5.707 5.707 1.414-1.414-5.707-5.707A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z"/>
           </svg>
@@ -71,7 +77,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import MapSelector from './MapSelector.vue'
 import { MapPin } from 'lucide-vue-next'
 
@@ -85,7 +91,7 @@ const props = defineProps({
       lng: null, 
       codigo: null, 
       municipio: '',
-      display_name: null,
+      localidad: null,
       place_id: null
     }) 
   },
@@ -96,8 +102,9 @@ const emit = defineEmits([
   'update:municipio', 
   'update:coords', 
   'update:direccion',
-  'update:display_name',  // ✅ NUEVO
-  'update:place_id'       // ✅ NUEVO
+  'update:codigo',
+  'update:localidad',
+  'update:place_id'
 ])
 
 // ---------------- ESTADOS ----------------
@@ -111,11 +118,19 @@ const results = ref([])
 const showResults = ref(false)
 const MAX_RESULTS = 20
 
-// Coordenadas + display_name + place_id
 const localCoords = ref({ 
   ...props.coords,
-  display_name: props.coords?.display_name || null,
+  codigo: props.coords?.codigo || null,
   place_id: props.coords?.place_id || null
+})
+
+// ---------------- HELPERS ----------------
+const getLocalidadNombre = (displayName) => {
+  return displayName?.match(/Localidad\s+([^,]+)/i)?.[1] || null
+}
+
+const canSearch = computed(() => {
+  return direccion.value && direccion.value.trim().length >= 8
 })
 
 // ---------------- CICLO DE VIDA ----------------
@@ -140,7 +155,7 @@ onMounted(async () => {
         lng: Number(obj.lng),
         codigo: obj.codigo || null,
         municipio: obj.municipio || '',
-        display_name: obj.display_name || null,
+        localidad: obj.localidad || null,
         place_id: obj.place_id || null
       }
 
@@ -149,7 +164,7 @@ onMounted(async () => {
   }
 })
 
-// ---------------- FUNCIONES ----------------
+// ---------------- MUNICIPIOS ----------------
 const initializeMunicipio = (item) => {
   search.value = item.municipio
   localCoords.value = {
@@ -157,7 +172,6 @@ const initializeMunicipio = (item) => {
     lng: Number(item.lng || 0),
     codigo: item.codigoDane || null,
     municipio: item.municipio,
-    display_name: null,
     place_id: null
   }
   mapRef.value?.placeMarker(localCoords.value.lat, localCoords.value.lng)
@@ -165,8 +179,11 @@ const initializeMunicipio = (item) => {
 
 const filterMunicipios = () => {
   const q = search.value.toLowerCase().trim()
-  filtered.value = (!q ? municipios.value : municipios.value.filter(m => m.municipio.toLowerCase().includes(q)))
-    .slice(0, MAX_RESULTS)
+  filtered.value = (!q 
+    ? municipios.value 
+    : municipios.value.filter(m => m.municipio.toLowerCase().includes(q))
+  ).slice(0, MAX_RESULTS)
+
   showDropdown.value = true
 }
 
@@ -180,7 +197,7 @@ const selectMunicipio = item => {
     codigo: item.codigoDane,
     municipio: item.municipio,
     departamento: item.departamento,
-    display_name: null,
+    localidad: null,
     place_id: null
   }
 
@@ -191,14 +208,16 @@ const selectMunicipio = item => {
     departamento: item.departamento,
     lat: Number(item.lat),
     lng: Number(item.lng),
-    codigo: item.codigoDane
+    codigo: item.codigoDane,
+    localidad: null
   }
 
   emit('update:municipio', selected)
   emit('update:coords', localCoords.value)
   emit('update:direccion', direccion.value)
-  emit('update:display_name', localCoords.value.display_name) // ✅ NUEVO
-  emit('update:place_id', localCoords.value.place_id)         // ✅ NUEVO
+  emit('update:codigo', localCoords.value.codigo)
+  emit('update:localidad', localCoords.value.localidad)
+  emit('update:place_id', localCoords.value.place_id)
 
   mapRef.value?.placeMarker(localCoords.value.lat, localCoords.value.lng)
 
@@ -208,35 +227,59 @@ const selectMunicipio = item => {
   }))
 }
 
-// ---------------- BUSCAR DIRECCIÓN ----------------
+// ---------------- BUSCAR DIRECCIÓN (🔥 CAMBIO AQUÍ) ----------------
 const buscarDireccion = async () => {
   if (!direccion.value.trim() || !search.value.trim()) return
 
   const ciudad = (localCoords.value.municipio || search.value).replace(/\s*\(.*\)$/, '')
-  const direcionnormalizada = normalizarDireccion(direccion.value)
-  direccion.value = direcionnormalizada
-  const query = encodeURIComponent(`${direcionnormalizada}, ${ciudad}, Colombia`)
+  const direccionNormalizada = normalizarDireccion(direccion.value)
+  const API_URL =  `https://localhost:7109/api/Geocoding`;
+  
+  direccion.value = direccionNormalizada
 
   try {
-    const data = await (await fetch(`https://us1.locationiq.com/v1/search?key=pk.21cc39d91ae48ec7d7a064d2e7241480&q=${query}&format=json&limit=5`)).json()
-    results.value = data
+    const res = await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        pais: 'Colombia',
+        municipio: ciudad,
+        direccion: direccionNormalizada
+      })
+    })
+
+    if (!res.ok) throw new Error(`Error en API: ${res.status}`)
+
+    const data = await res.json()
+
+    results.value = data.map(x => ({
+      lat: x.latitude,
+      lon: x.longitude,
+      display_name: x.displayName,
+      place_id: x.placeId
+    }))
+
     showResults.value = results.value.length > 1
     if (results.value.length === 1) applyResult(results.value[0])
-  } catch (err) { console.error(err) }
+
+  } catch (err) {
+    console.error('Error buscando dirección:', err)
+  }
 }
 
+// ---------------- RESULTADOS ----------------
 const applyResult = item => {
   localCoords.value.lat = Number(item.lat)
   localCoords.value.lng = Number(item.lon)
-  localCoords.value.display_name = item.display_name
+  localCoords.value.localidad = getLocalidadNombre(item.display_name)
   localCoords.value.place_id = item.place_id
 
   mapRef.value?.placeMarker(localCoords.value.lat, localCoords.value.lng)
 
   emit('update:coords', localCoords.value)
   emit('update:direccion', direccion.value)
-  emit('update:display_name', localCoords.value.display_name) // ✅
-  emit('update:place_id', localCoords.value.place_id)         // ✅
+  emit('update:localidad', localCoords.value.localidad)
+  emit('update:place_id', localCoords.value.place_id)
 
   showResults.value = false
 
@@ -246,16 +289,19 @@ const applyResult = item => {
   }))
 }
 
+// ---------------- MAPA ----------------
 const onMapUpdate = coords => {
   localCoords.value = {
     ...coords,
-    display_name: localCoords.value.display_name,
+    codigo: localCoords.value.codigo,
+    localidad: localCoords.value.localidad,
     place_id: localCoords.value.place_id
   }
 
   emit('update:coords', localCoords.value)
-  emit('update:display_name', localCoords.value.display_name) // ✅
-  emit('update:place_id', localCoords.value.place_id)         // ✅
+  emit('update:codigo', localCoords.value.codigo)
+  emit('update:localidad', localCoords.value.localidad)
+  emit('update:place_id', localCoords.value.place_id)
 
   localStorage.setItem('selectedLocation', JSON.stringify({
     ...localCoords.value,
@@ -272,14 +318,26 @@ const clearAndOpen = () => {
 
 const normalizarDireccion = input => {
   if (!input) return ''
-  let dir = input.toLowerCase().replace(/[<>"'`;(){}[\]\\]/g, '').replace(/\s+/g, ' ').trim()
-  dir = dir.replace(/\s*#\s*/g, ' # ').replace(/\s*-\s*/g, ' - ')
+  let dir = input.toLowerCase()
+    .replace(/[<>"'`;(){}[\]\\]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+
+  dir = dir.replace(/\s*#\s*/g, ' # ')
+  dir = dir.replace(/\s*-\s*/g, ' - ')
+
   const r = { calle:'cl', carrera:'kr', avenida:'av', transversal:'tv', diagonal:'dg' }
-  Object.keys(r).forEach(k => { dir = dir.replace(new RegExp(`\\b${k}\\b`, 'gi'), r[k]) })
+
+  Object.keys(r).forEach(k => {
+    dir = dir.replace(new RegExp(`\\b${k}\\b`, 'gi'), r[k])
+  })
+
   return dir.toUpperCase()
 }
 
-const hideDropdown = () => { setTimeout(() => showDropdown.value = false, 150) }
+const hideDropdown = () => {
+  setTimeout(() => showDropdown.value = false, 150)
+}
 </script>
 
 <style scoped>
@@ -300,4 +358,5 @@ const hideDropdown = () => { setTimeout(() => showDropdown.value = false, 150) }
 .google-link-container { margin-top: 16px; display: flex; justify-content: flex-start; }
 .google-link-button { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 15px; color: #1a73e8; background-color: #e8f0fe; padding: 8px 14px; border-radius: 10px; text-decoration: none; box-shadow: 0 2px 4px rgba(0,0,0,0.08); transition: all 0.2s ease; }
 .google-link-button:hover { background-color: #d2e3fc; color: #174ea6; box-shadow: 0 4px 8px rgba(0,0,0,0.12); transform: translateY(-1px); }
+.disabled-btn { background-color: #ccc !important; cursor: not-allowed; opacity: 0.6; }
 </style>

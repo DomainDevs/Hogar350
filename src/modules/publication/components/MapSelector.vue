@@ -4,6 +4,8 @@
     <button
       class="absolute z-10 top-2 right-2 bg-white shadow rounded px-3 py-1 text-sm hover:bg-gray-100 hover:scale-105 transition-transform duration-200 tooltip"
       @click="useMyLocation"
+      :disabled="readonly"
+      :class="{ 'opacity-50 cursor-not-allowed': readonly }"
     >
       📍 Mi ubicación
       <span class="tooltip-text">Ir a mi ubicación</span>
@@ -23,7 +25,8 @@ import "leaflet/dist/leaflet.css"
 const props = defineProps({
   lat: { type: Number, default: null },
   lng: { type: Number, default: null },
-  codigo: String
+  codigo: String,
+  readonly: { type: Boolean, default: false } // <-- controla modo edición
 })
 
 const emit = defineEmits(['update:coords'])
@@ -61,26 +64,40 @@ function emitCoords(lat, lng) {
 // Coloca marcador con animación
 function placeMarker(lat, lng, fromUser = false) {
   if (!map.value) return
+
   if (marker.value) {
     marker.value.setLatLng([lat, lng], { animate: true, duration: 0.5 })
   } else {
-    marker.value = L.marker([lat, lng], { draggable: true, icon: customIcon }).addTo(map.value)
-    marker.value.on("dragend", e => {
-      const pos = e.target.getLatLng()
-      emitCoords(pos.lat, pos.lng)
-    })
-    marker.value.getElement().style.cursor = 'grab'
+    marker.value = L.marker([lat, lng], { 
+      draggable: !props.readonly, // solo editable si no es readonly
+      icon: customIcon 
+    }).addTo(map.value)
+
+    if (!props.readonly) {
+      marker.value.on("dragend", e => {
+        const pos = e.target.getLatLng()
+        emitCoords(pos.lat, pos.lng)
+      })
+      marker.value.getElement().style.cursor = 'grab'
+    } else {
+      marker.value.getElement().style.cursor = 'default'
+    }
   }
+
   map.value.setView([lat, lng], currentZoom.value, { animate: true, duration: 0.5 })
   if (fromUser) emitCoords(lat, lng)
 }
 
+// Click en el mapa solo si no es readonly
 function onMapClick(e) {
+  if (props.readonly) return
   const { lat, lng } = e.latlng
   placeMarker(lat, lng, true)
 }
 
+// Botón "Mi ubicación"
 function useMyLocation() {
+  if (props.readonly) return
   if (!navigator.geolocation) return
   navigator.geolocation.getCurrentPosition(pos => {
     const { latitude, longitude } = pos.coords
@@ -138,10 +155,10 @@ defineExpose({ placeMarker })
 
 /* Tooltip botón ubicación */
 .tooltip {
-  position: absolute; /* antes era relative, ahora absoluto dentro del contenedor */
-  top: 10px;          /* separación superior */
-  right: 10px;        /* separación derecha */
-  z-index: 10000;     /* siempre sobre el mapa */
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10000;
 }
 
 .tooltip-text {
@@ -169,10 +186,10 @@ defineExpose({ placeMarker })
 
 /* Hover del botón ubicación */
 button {
-  position: absolute;      /* sobre el mapa */
-  top: 10px;               /* separación desde el top */
-  right: 10px;             /* separación desde la derecha */
-  z-index: 10000;          /* siempre encima del mapa */
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10000;
   background-color: #fff;
   border-radius: 6px;
   padding: 6px 12px;
@@ -187,5 +204,9 @@ button {
 button:hover {
   transform: scale(1.05);
   box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+}
+
+button:disabled {
+  pointer-events: none;
 }
 </style>

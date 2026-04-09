@@ -172,18 +172,19 @@
     <LocationComponent
       :municipio="form.ubicacion.municipio"
       :direccion="form.ubicacion.direccion"
+      :codigo="form.ubicacion.codigo"
+      :localidad="form.ubicacion.localidad"
       :coords="{ lat: form.ubicacion.lat, lng: form.ubicacion.lng }"
       @update:municipio="val => form.ubicacion.municipio = val"
       @update:direccion="val => form.ubicacion.direccion = val"
+      @update:codigo="val => form.ubicacion.codigo = val"
+      @update:localidad="val => form.ubicacion.localidad = val"
       @update:coords="val => { 
         form.ubicacion.lat = val.lat; 
         form.ubicacion.lng = val.lng; 
       }"
     />
-
-    <p v-if="errors.direccion" class="error-msg">{{ errors.direccion }}</p>
-    <p v-if="errors.municipio" class="error-msg">{{ errors.municipio }}</p>
-    
+      <p v-if="errors.direccion" class="error-msg">{{ errors.direccion }}</p>
       
       <button type="button" @click="handleUnlock(4)" class="btn-primary mt-8">Siguiente: Definir precios</button>
     </section>
@@ -271,7 +272,7 @@ const form = reactive({
     habitaciones: 1, banos: 1, parqueaderos: 0, area: 0, areapv: 0, 
     estrato: '', piso: '', tiempoConstruccion: '', aceptaMascotas: false 
   },
-  ubicacion: { municipio: {}, direccion: '', lat: null, lng: null, codigo: null, display_name: null }, //, display_name: null, place_id: 0
+  ubicacion: { municipio: {}, direccion: '', lat: null, lng: null, codigo: null, localidad: null }, //, display_name: null, place_id: 0
   precios: { venta: 0, arriendo: 0, administracion: 0, compartir: 0 },
   imagenes: []
 });
@@ -380,7 +381,7 @@ onMounted(async () => {
 const resetForm = () => { if (confirm('¿Limpiar todo el formulario?')) { sessionStorage.removeItem('publicationForm'); location.reload(); }};
 const goPreview = () => router.push({ name: 'PublicationPreview' });
 
-console.log('Ubicacion JSON:', JSON.stringify(form.ubicacion));
+//console.log('Ubicacion JSON:', JSON.stringify(form.ubicacion));
 </script>
 
 <style scoped>

@@ -5,8 +5,7 @@
     <div v-if="blocked" class="fixed inset-0 bg-black bg-opacity-30 z-50 flex items-center justify-center">
       <span class="text-white text-lg font-medium">Enviando publicación...</span>
     </div>
-
-    <!-- Media -->
+    
     <!-- Media -->
     <MediaViewer
       :images="form.imagenes.map(i => i.url || i)"
@@ -18,7 +17,7 @@
     />
 
     <!-- Card Principal -->
-    <div class="bg-white rounded-2xl shadow-lg p-6 space-y-6">
+    <div class="bg-white rounded-2xl shadow-lg p-8 space-y-6">
       <div class="border-b pb-4">
         <h2 class="text-5xl font-bold">{{ form.general.titulo }}</h2>
       </div>
@@ -46,8 +45,7 @@
             <Home class="w-5 h-5 text-[#ff5500] mt-1" />
             <div>
               <p class="text-xs uppercase text-gray-400">Publicado por</p>
-              <p class="font-semibold text-gray-800">
-                {{ form.general.tipoIdentificacion === 'NIT' ? form.general.razonSocial : `${form.general.nombreContacto} ${form.general.apellidoContacto}` }}
+              <p class="font-semibold text-gray-800">{{ form.general.tipoIdentificacion === 'NIT' ? form.general.razonSocial : `${form.general.nombreContacto} ${form.general.apellidoContacto}` }}
               </p>
               <p class="text-gray-600 text-xs">• {{ form.general.telefonoContacto }} • {{ form.general.emailContacto }}</p>
             </div>
@@ -179,6 +177,7 @@ const listaCaracteristicas = computed(() => [
 const ubicacionVisible = computed(() => [
   { label: 'Departamento', value: () => typeof form.ubicacion.municipio.departamento === '' ? form.ubicacion.municipio.departamento?.nombre : form.ubicacion.municipio.departamento, icon: MapPin },
   { label: 'Municipio', value: () => typeof form.ubicacion.municipio.municipio === 'object' ? form.ubicacion.municipio.municipio?.nombre : form.ubicacion.municipio.municipio, icon: MapPin },
+  { label: 'Localidad', value: () => typeof form.ubicacion.localidad === 'object' ? form.ubicacion.localidad?.nombre : form.ubicacion.localidad, icon: MapPin },
   { label: 'Dirección', value: () => form.ubicacion.direccion || '-', icon: Home } //, full: true
 ]);
 
@@ -198,7 +197,7 @@ onMounted(() => {
         'https://multimedia.metrocuadrado.com/13439-M6448066/13439-M6448066_2_x.jpg?w=1080&q=80'
       ];
 
-      console.log('Ubicacion JSON:', JSON.stringify(form.ubicacion));
+      //console.log('Ubicacion JSON:', JSON.stringify(form.ubicacion));
     }
   }
   loaded.value = true;
@@ -210,7 +209,7 @@ const publish = async () => {
   blocked.value = true;
 
   // 👀 Mostrar form completo en consola
-  console.log('Formulario a publicar:', JSON.parse(JSON.stringify(form)));
+  //console.log('Formulario a publicar:', JSON.parse(JSON.stringify(form)));
 
   try {
     const payload = { ...form, imagenes: form.imagenes.map(img => img.url || img) };
