@@ -241,24 +241,13 @@ import Tour360 from '@/shared/components/Tour360.vue';
 import LocationComponent from '@/modules/publication/components/LocationComponent.vue';
 import * as validators from '@/modules/publication/utils/validators';
 
+// Importamos constantes y helpers
+import { caracteristicasLabels, tiempoOptions, currencyMask, getOptionsForKey, cleanPrice } from '../utils/constants.js';
+
 const router = useRouter();
 const blocked = ref(false);
 const propertyTypesOptions = ref([]);
 const sectionRefs = reactive({});
-
-// Configuración Constante
-const caracteristicasLabels = {
-  habitaciones: 'Habitaciones', banos: 'Baños', parqueaderos: 'Parqueaderos',
-  area: 'Área Const. (m²)', areapv: 'Área priv. (m²)', estrato: 'Estrato',
-  piso: 'Piso (s)', tiempoConstruccion: 'Construcción', aceptaMascotas: '¿Mascotas?'
-};
-
-const tiempoOptions = [
-  {l: '0-5 años', v: '0-5'}, {l: '5-10 años', v: '5-10'}, {l: '10-15 años', v: '10-15'},
-  {l: '20-30 años', v: '20-30'}, {l: 'Más de 30 años', v: '30+'}, {l: 'Proyecto nuevo', v: '0'}
-];
-
-const currencyMask = { mask: Number, scale: 0, thousandsSeparator: ',', prefix: '$ ' };
 
 // Estado Reactivo Centralizado
 const form = reactive({
@@ -272,7 +261,7 @@ const form = reactive({
     habitaciones: 1, banos: 1, parqueaderos: 0, area: 0, areapv: 0, 
     estrato: '', piso: '', tiempoConstruccion: '', aceptaMascotas: false 
   },
-  ubicacion: { municipio: {}, direccion: '', lat: null, lng: null, codigo: null, localidad: null }, //, display_name: null, place_id: 0
+  ubicacion: { municipio: {}, direccion: '', lat: null, lng: null, codigo: null, localidad: null },
   precios: { venta: 0, arriendo: 0, administracion: 0, compartir: 0 },
   imagenes: []
 });
@@ -289,18 +278,17 @@ const activePriceFields = computed(() => {
   if (tipoOferta === 'Vender') 
     fields.push({ id: 'precioVenta', model: 'venta', label: 'Precio de Venta', placeholder: 'Ej: 500.000.000' });
   if (tipoOferta === 'Arrendar') {
-    fields.push({ id: 'precioArriendo', model: 'arriendo', label: 'Valor Arriendo', placeholder: 'Ej: 1.500.000' },
-                { id: 'precioAdmin', model: 'administracion', label: 'Valor administración', placeholder: 'Ej: 200.000' });
+    fields.push(
+      { id: 'precioArriendo', model: 'arriendo', label: 'Valor Arriendo', placeholder: 'Ej: 1.500.000' },
+      { id: 'precioAdmin', model: 'administracion', label: 'Valor administración', placeholder: 'Ej: 200.000' }
+    );
   }
   if (tipoOferta === 'Compartir')
     fields.push({ id: 'precioCompartir', model: 'compartir', label: 'Valor Arriendo compartir', placeholder: 'Ej: 650.000' });
   return fields;
 });
 
-// Helpers
-const getOptionsForKey = (key) => key === 'parqueaderos' ? [0,1,2,3,'4+'] : [1,2,3,4,'5+'];
-const cleanPrice = (val) => Number(String(val).replace(/[^0-9]/g, ''));
-
+// Validación de campos
 const validateField = (field) => {
   const g = form.general;
   const c = form.caracteristicas;
@@ -342,6 +330,7 @@ const validateField = (field) => {
   if (rules[field]) rules[field]();
 };
 
+// Desbloqueo de secciones
 const handleUnlock = (n) => {
   const validationMap = {
     2: ['tipoInmueble', 'titulo', isCompany.value ? 'razonSocial' : 'nombreContacto', 'apellidoContacto', 'numeroIdentificacion', 'telefonoContacto', 'emailContacto', 'descripcion'],
@@ -360,7 +349,7 @@ const handleUnlock = (n) => {
   }
 };
 
-// Ciclo de vida y Persistencia
+// Persistencia en sessionStorage
 watch([form, unlockedSections], () => {
   sessionStorage.setItem('publicationForm', JSON.stringify({ form, unlockedSections }));
 }, { deep: true });
@@ -378,10 +367,16 @@ onMounted(async () => {
   } catch (err) { console.error('Error cargando tipos:', err); }
 });
 
-const resetForm = () => { if (confirm('¿Limpiar todo el formulario?')) { sessionStorage.removeItem('publicationForm'); location.reload(); }};
+// Funciones de utilidad
+const resetForm = () => { 
+  if (confirm('¿Limpiar todo el formulario?')) { 
+    sessionStorage.removeItem('publicationForm'); 
+    location.reload(); 
+  }
+};
+
 const goPreview = () => router.push({ name: 'PublicationPreview' });
 
-//console.log('Ubicacion JSON:', JSON.stringify(form.ubicacion));
 </script>
 
 <style scoped>

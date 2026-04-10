@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-
     <!-- Ciudad / Municipio -->
     <div class="field-container">
       <label class="label-style">Ciudad / Municipio <span class="required">*</span></label>
@@ -24,7 +23,6 @@
         </ul>
       </div>
     </div>
-
     <!-- Dirección exacta -->
     <div class="field-container">
       <label class="label-style">Dirección exacta <span class="required">*</span></label>
@@ -48,13 +46,23 @@
           </svg>
           Buscar
         </button>
-
         <ul v-if="showResults" class="dropdown-list results-list">
           <li v-for="(item, i) in results" :key="i" @click="applyResult(item)" class="dropdown-item">
             {{ item.display_name }}
           </li>
         </ul>
       </div>
+        <div>
+        <p v-if="loading" class="text-gray-500 text-sm mt-1">
+          🔄 Buscando dirección...
+        </p>
+        <p v-if="errorMessage" class="text-red-500 text-sm mt-1">
+          ❌ {{ errorMessage }}
+        </p>
+        <p v-if="noResults" class="text-yellow-600 text-sm mt-1">
+          ⚠️ No se encontraron resultados
+        </p>
+        </div>
     </div>
 
     <!-- Mapa -->
@@ -117,6 +125,11 @@ const filtered = ref([])
 const results = ref([])
 const showResults = ref(false)
 const MAX_RESULTS = 20
+
+
+const loading = ref(false)
+const errorMessage = ref('')
+const noResults = ref(false)
 
 const localCoords = ref({ 
   ...props.coords,
@@ -227,17 +240,28 @@ const selectMunicipio = item => {
   }))
 }
 
-// ---------------- BUSCAR DIRECCIÓN (🔥 CAMBIO AQUÍ) ----------------
+// ---------------- BUSCAR DIRECCIÓN (FIX SEGURO) ----------------
 const buscarDireccion = async () => {
-  if (!direccion.value.trim() || !search.value.trim()) return
+  const direccionRaw = direccion.value?.trim()
+  const municipioRaw = search.value?.trim()
 
-  const ciudad = (localCoords.value.municipio || search.value).replace(/\s*\(.*\)$/, '')
-  const direccionNormalizada = normalizarDireccion(direccion.value)
-  const API_URL =  `https://localhost:7109/api/Geocoding`;
-  
-  direccion.value = direccionNormalizada
+  if (!direccionRaw || !municipioRaw) return
+
+  loading.value = true
+  errorMessage.value = ''
+  noResults.value = false
+  showResults.value = false
+
+  const ciudad = (localCoords.value.municipio || municipioRaw)
+    .replace(/\s*\(.*\)$/, '')
+
+  const direccionNormalizada = normalizarDireccion(direccionRaw)
+
+  const API_URL = 'https://localhost:7109/api/Geocoding'
 
   try {
+    direccion.value = direccionNormalizada
+
     const res = await fetch(API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -248,22 +272,39 @@ const buscarDireccion = async () => {
       })
     })
 
-    if (!res.ok) throw new Error(`Error en API: ${res.status}`)
+    if (!res.ok) {
+      errorMessage.value = `Error del servidor (${res.status})`
+      return
+    }
 
     const data = await res.json()
 
-    results.value = data.map(x => ({
-      lat: x.latitude,
-      lon: x.longitude,
-      display_name: x.displayName,
-      place_id: x.placeId
-    }))
+    if (!Array.isArray(data) || data.length === 0) {
+      noResults.value = true
+      results.value = []
+      return
+    }
+
+    results.value = data
+      .filter(x => x?.latitude && x?.longitude)
+      .map(x => ({
+        lat: Number(x.latitude),
+        lon: Number(x.longitude),
+        display_name: x.displayName || '',
+        place_id: x.placeId || null
+      }))
 
     showResults.value = results.value.length > 1
-    if (results.value.length === 1) applyResult(results.value[0])
+
+    if (results.value.length === 1) {
+      applyResult(results.value[0])
+    }
 
   } catch (err) {
     console.error('Error buscando dirección:', err)
+    errorMessage.value = 'No se pudo conectar con el servicio'
+  } finally {
+    loading.value = false
   }
 }
 
