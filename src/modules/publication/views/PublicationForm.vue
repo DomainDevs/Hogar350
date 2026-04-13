@@ -162,12 +162,26 @@
         </div>
       </div>
 
-      <button type="button" @click="handleUnlock(3)" class="btn-primary mt-8">Siguiente: Ubicación</button>
+      <button type="button" @click="handleUnlock(3)" class="btn-primary mt-8">Siguiente: Beneficios</button>
     </section>
 
-    <!-- SECCIÓN 3: Ubicación -->
+    <!-- SECCIÓN 3: Beneficios -->
     <section v-show="unlockedSections[3]" :ref="el => sectionRefs[3] = el" class="step-section">
-      <h2 class="section-title"><span class="step-number">3</span> Ubicación</h2>
+      <h2 class="section-title">
+        <span class="step-number">3</span> Beneficios
+      </h2>
+
+      <!-- Amenities -->
+      <div class="mt-6">
+        <AmenitiesCheckbox v-model="form.amenities" />
+      </div>
+      <button type="button" @click="handleUnlock(4)" class="btn-primary mt-8">Siguiente: Ubicación</button>
+    </section>
+
+
+    <!-- SECCIÓN 4: Ubicación -->
+    <section v-show="unlockedSections[4]" :ref="el => sectionRefs[4] = el" class="step-section">
+      <h2 class="section-title"><span class="step-number">4</span> Ubicación</h2>
       
     <LocationComponent
       :municipio="form.ubicacion.municipio"
@@ -186,12 +200,12 @@
     />
       <p v-if="errors.direccion" class="error-msg">{{ errors.direccion }}</p>
       
-      <button type="button" @click="handleUnlock(4)" class="btn-primary mt-8">Siguiente: Definir precios</button>
+      <button type="button" @click="handleUnlock(5)" class="btn-primary mt-8">Siguiente: Definir precios</button>
     </section>
 
-    <!-- SECCIÓN 4: Precios -->
-    <section v-show="unlockedSections[4]" :ref="el => sectionRefs[4] = el" class="step-section">
-      <h2 class="section-title"><span class="step-number">4</span> Precios</h2>
+    <!-- SECCIÓN 5: Precios -->
+    <section v-show="unlockedSections[5]" :ref="el => sectionRefs[5] = el" class="step-section">
+      <h2 class="section-title"><span class="step-number">5</span> Precios</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div v-for="field in activePriceFields" :key="field.id" class="relative">
           <label class="label-style" :for="field.id">{{ field.label }} <span class="text-brand">*</span></label>
@@ -202,16 +216,16 @@
           <p v-if="errors[field.model]" class="error-msg">{{ errors[field.model] }}</p>
         </div>
       </div>
-      <button type="button" @click="handleUnlock(5)" class="btn-primary mt-8">Ir a Multimedia</button>
+      <button type="button" @click="handleUnlock(6)" class="btn-primary mt-8">Ir a Multimedia</button>
     </section>
 
     <!-- SECCIÓN 5: Multimedia -->
-    <section v-show="unlockedSections[5]" :ref="el => sectionRefs[5] = el" class="step-section border-dashed border-2">
-      <h2 class="section-title"><span class="step-number">5</span> Multimedia</h2>
+    <section v-show="unlockedSections[6]" :ref="el => sectionRefs[6] = el" class="step-section border-dashed border-2">
+      <h2 class="section-title"><span class="step-number">6</span> Multimedia</h2>
       <ImageUploader v-model="form.imagenes" :maxFiles="10" />
       <div class="media-footer">
         <label class="label-style">Tour 360</label>
-        <Tour360 v-if="unlockedSections[5]" />
+        <Tour360 v-if="unlockedSections[6]" />
       </div>
       <div class="media-footer">
         <label class="label-style">Video de YouTube (Opcional)</label>
@@ -239,6 +253,7 @@ import ImageUploader from '@/modules/home/components/imagesuploader/ImageUploade
 import VideoInput from '@/shared/components/VideoInput.vue';
 import Tour360 from '@/shared/components/Tour360.vue';
 import LocationComponent from '@/modules/publication/components/LocationComponent.vue';
+import AmenitiesCheckbox from '@/modules/publication/components/AmenitiesCheckbox.vue';
 import * as validators from '@/modules/publication/utils/validators';
 
 // Importamos constantes y helpers
@@ -263,6 +278,7 @@ const form = reactive({
   },
   ubicacion: { municipio: {}, direccion: '', lat: null, lng: null, codigo: null, localidad: null },
   precios: { venta: 0, arriendo: 0, administracion: 0, compartir: 0 },
+  amenities: [],
   imagenes: []
 });
 
@@ -275,16 +291,20 @@ const isCompany = computed(() => form.general.tipoIdentificacion === 'NIT');
 const activePriceFields = computed(() => {
   const fields = [];
   const { tipoOferta } = form.general;
+
   if (tipoOferta === 'Vender') 
     fields.push({ id: 'precioVenta', model: 'venta', label: 'Precio de Venta', placeholder: 'Ej: 500.000.000' });
+
   if (tipoOferta === 'Arrendar') {
     fields.push(
       { id: 'precioArriendo', model: 'arriendo', label: 'Valor Arriendo', placeholder: 'Ej: 1.500.000' },
       { id: 'precioAdmin', model: 'administracion', label: 'Valor administración', placeholder: 'Ej: 200.000' }
     );
   }
+
   if (tipoOferta === 'Compartir')
     fields.push({ id: 'precioCompartir', model: 'compartir', label: 'Valor Arriendo compartir', placeholder: 'Ej: 650.000' });
+
   return fields;
 });
 
@@ -327,7 +347,15 @@ const validateField = (field) => {
     compartir: () => errors.compartir = (g.tipoOferta === 'Compartir' && cleanPrice(v.compartir) < 300000) ? 'Mínimo $300.000' : ''
   };
 
-  if (rules[field]) rules[field]();
+
+  if (rules[field]) {
+    rules[field]();
+    console.log('📦 error actualizado:', field, errors[field]);
+  } else {
+    console.warn('⚠️ Campo sin regla:', field);
+  }
+
+  console.log('📊 snapshot errors:', { ...errors });
 };
 
 // Desbloqueo de secciones
@@ -335,13 +363,14 @@ const handleUnlock = (n) => {
   const validationMap = {
     2: ['tipoInmueble', 'titulo', isCompany.value ? 'razonSocial' : 'nombreContacto', 'apellidoContacto', 'numeroIdentificacion', 'telefonoContacto', 'emailContacto', 'descripcion'],
     3: ['area', 'areapv', 'estrato', 'piso', 'tiempoConstruccion'],
-    4: ['direccion'],
-    5: activePriceFields.value.map(f => f.model)
+    4: ['amenities'],
+    5: ['direccion'],
+    6: (activePriceFields.value || []).map(f => f.model)
   };
   
-  validationMap[n].forEach(validateField);
-  
-  if (!validationMap[n].some(f => errors[f])) {
+  (validationMap[n] || []).forEach(validateField);
+
+  if (!(validationMap[n] || []).some(f => errors[f])) {
     unlockedSections[n] = true;
     setTimeout(() => {
       sectionRefs[n]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -367,7 +396,6 @@ onMounted(async () => {
   } catch (err) { console.error('Error cargando tipos:', err); }
 });
 
-// Funciones de utilidad
 const resetForm = () => { 
   if (confirm('¿Limpiar todo el formulario?')) { 
     sessionStorage.removeItem('publicationForm'); 

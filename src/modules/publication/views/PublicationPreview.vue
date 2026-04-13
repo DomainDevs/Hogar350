@@ -5,7 +5,7 @@
     <div v-if="blocked" class="fixed inset-0 bg-black bg-opacity-30 z-50 flex items-center justify-center">
       <span class="text-white text-lg font-medium">Enviando publicación...</span>
     </div>
-    
+
     <!-- Media -->
     <MediaViewer
       :images="form.imagenes.map(i => i.url || i)"
@@ -91,6 +91,18 @@
       </div>
     </div>
 
+    <!-- Amenities -->
+    <div class="step-section shadow-md">
+      <h3 class="text-xl font-semibold mb-4">Beneficios</h3>
+      <hr/><br/>
+
+      <div class="flex flex-wrap gap-2">
+        <span v-for="a in form.amenities" :key="a" class="px-3 py-1 bg-gray-100 rounded-md text-sm font-bold text-gray-700"">
+          <span class="text-green-700 font-bold">✓</span> {{ amenitiesMap[a] || a }}
+        </span>
+      </div>
+    </div>
+
     <!-- Ubicación -->
     <div class="step-section shadow-md">
       <div class="flex justify-between items-center mb-4">
@@ -134,6 +146,7 @@ const blocked = ref(false);
 const loaded = ref(false);
 const currentImageIndex = ref(0)
 const tourUrl = 'https://kuula.co/share/collection/798qV?logo=0&info=0&fs=1&vr=1&zoom=1&initload=0&thumbs=1'
+const amenitiesMap = ref({}) //beneficios
 
 const form = reactive({
   general: { tipoOferta:'', tipoInmueble:'', titulo:'', nombreContacto:'', apellidoContacto:'', telefonoContacto:'', emailContacto:'', descripcion:'', tipoIdentificacion:'', razonSocial:'', videoUrl:'' },
@@ -142,6 +155,9 @@ const form = reactive({
   ubicacion: { municipio:{}, direccion:'', lat:null, lng:null },
   imagenes: []
 });
+
+
+
 
 // --- LOGICA COMPUTADA PARA LIMPIAR EL TEMPLATE ---
 
@@ -192,15 +208,29 @@ onMounted(() => {
     const data = JSON.parse(saved);
     Object.assign(form, data.form);
     if(!form.imagenes.length) {
-       form.imagenes = [
+      form.imagenes = [
         'https://multimedia.metrocuadrado.com/13439-M6448066/13439-M6448066_1_x.jpg?w=1080&q=80',
         'https://multimedia.metrocuadrado.com/13439-M6448066/13439-M6448066_2_x.jpg?w=1080&q=80'
       ];
-
-      //console.log('Ubicacion JSON:', JSON.stringify(form.ubicacion));
     }
   }
-  loaded.value = true;
+
+  // 🔥 SOLO ESTO NUEVO (no rompe nada)
+  fetch('/data/amenities.json')
+    .then(res => res.json())
+    .then(data => {
+      const map = {}
+
+      data.forEach(cat => {
+        cat.items.forEach(i => {
+          map[i.key] = i.label
+        })
+      })
+
+      amenitiesMap.value = map
+    })
+    //console.log('Ubicacion JSON:', JSON.stringify(form.ubicacion));
+  loaded.value = true
 });
 
 const goBack = () => router.back();
